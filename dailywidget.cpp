@@ -4,7 +4,7 @@
 DailyWidget::DailyWidget(QWidget *parent) : QWidget(parent)
 {
     grid_layout = new QGridLayout(this);
-    setMaximumSize(475, 300);
+    setMaximumSize(450, 300);
     setContentsMargins(4,4,4,4);
     setStyleSheet("QWidget {background: #FFAB40; border: none; border-radius: 16px;}");
     auto labels_style = QString("QLabel {font: bold 14px; color: white;}");
@@ -51,10 +51,17 @@ DailyWidget::DailyWidget(QWidget *parent) : QWidget(parent)
 
     m_pressure = new QLabel("Давление", this);
     m_pressure->setStyleSheet(labels_style);
-    grid_layout->addWidget(m_pressure, 5, 4, Qt::Alignment(Qt::AlignRight));
+    grid_layout->addWidget(m_pressure, 7, 0, 1, 1 );
     m_pressure_value = new QLabel(this);
     m_pressure_value->setStyleSheet(values_style);
-    grid_layout->addWidget(m_pressure_value, 5, 5);
+    grid_layout->addWidget(m_pressure_value, 7, 2, 1, 2);
+
+    m_wind = new QLabel("Ветер", this);
+    m_wind->setStyleSheet(labels_style);
+    grid_layout->addWidget(m_wind, 7, 3, 1, 1, Qt::Alignment(Qt::AlignRight));
+    m_wind_value = new QLabel(this);
+    m_wind_value->setStyleSheet(values_style);
+    grid_layout->addWidget(m_wind_value, 7, 4, 1, 2);
 
     m_uv_ix = new QLabel("УФ-индекс", this);
     m_uv_ix->setStyleSheet(labels_style);
@@ -77,19 +84,6 @@ DailyWidget::DailyWidget(QWidget *parent) : QWidget(parent)
     m_dew_point_value->setStyleSheet(values_style);
     grid_layout->addWidget(m_dew_point_value, 6, 5);
 
-    m_wind_deg = new QLabel("Направление ветра", this);
-    m_wind_deg->setStyleSheet(labels_style);
-    grid_layout->addWidget(m_wind_deg, 7, 0, 1, 2);
-    m_wind_deg_value = new QLabel(this);
-    m_wind_deg_value->setStyleSheet(values_style);
-    grid_layout->addWidget(m_wind_deg_value, 7, 2, 1, 1);
-
-    m_wind_speed = new QLabel("Скорость ветра", this);
-    m_wind_speed->setStyleSheet(labels_style);
-    grid_layout->addWidget(m_wind_speed, 7, 3, 1, 2, Qt::Alignment(Qt::AlignRight));
-    m_wind_speed_value = new QLabel(this);
-    m_wind_speed_value->setStyleSheet(values_style);
-    grid_layout->addWidget(m_wind_speed_value, 7, 5, 1, 1);
 
     m_second_blank_space = new QLabel(this);
     grid_layout->addWidget(m_second_blank_space, 8, 0, 1, 6);
@@ -169,9 +163,13 @@ void DailyWidget::update_widget_info(const QVariantMap &new_dataset, const int &
    m_dew_point_value->setText(QString("%1°C").arg(round(new_dataset["dew_point"].toDouble())));
    m_uv_ix_value->setText(new_dataset["uvi"].toString());
    m_clouds_value->setText(new_dataset["clouds"].toString() + "%");
-   m_visibility_value->setText(QString("%1км").arg(new_dataset["visibility"].toDouble() / 1000));
-   m_wind_speed_value->setText(QString("%1м/с").arg(round(new_dataset["wind_speed"].toDouble())));
-   m_wind_deg_value->setText(getWindDirection(new_dataset["wind_deg"].toInt()));
+   if (double visibility = new_dataset["visibility"].toDouble(); visibility > 1000)
+       m_visibility_value->setText(QString("%1км").arg(visibility / 1000));
+   else
+       m_visibility_value->setText(QString("%1м").arg(visibility));
+   auto wind_direction = getWindDirection(new_dataset["wind_deg"].toInt());
+   auto wind_speed = round(new_dataset["wind_speed"].toDouble());
+   m_wind_value->setText(QString::number(wind_speed) + "м/с, " + wind_direction);
 
    m_morn_temp_value->setText(QString("%1°C").arg(round(new_dataset_temp["morn"].toDouble())));
    m_day_temp_value->setText(QString("%1°C").arg(round(new_dataset_temp["day"].toDouble())));
@@ -211,10 +209,8 @@ void DailyWidget::maximize(){
     m_visibility_value->show();
     m_dew_point->show();
     m_dew_point_value->show();
-    m_wind_deg->show();
-    m_wind_deg_value->show();
-    m_wind_speed->show();
-    m_wind_speed_value->show();
+    m_wind->show();
+    m_wind_value->show();
 
     m_second_blank_space->show();
     m_morn_temp->show();
@@ -250,10 +246,8 @@ void DailyWidget::minimize(){
     m_visibility_value->hide();
     m_dew_point->hide();
     m_dew_point_value->hide();
-    m_wind_deg->hide();
-    m_wind_deg_value->hide();
-    m_wind_speed->hide();
-    m_wind_speed_value->hide();
+    m_wind->hide();
+    m_wind_value->hide();
 
     m_second_blank_space->hide();
     m_morn_temp->hide();

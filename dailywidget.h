@@ -46,10 +46,8 @@ private:
     QLabel *m_clouds_value;
     QLabel *m_visibility;
     QLabel *m_visibility_value;
-    QLabel *m_wind_speed;
-    QLabel *m_wind_speed_value;
-    QLabel *m_wind_deg;
-    QLabel *m_wind_deg_value;
+    QLabel *m_wind;
+    QLabel *m_wind_value;
 
     QLabel *m_second_blank_space;
     QLabel *m_morn_temp;
