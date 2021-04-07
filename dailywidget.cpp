@@ -162,25 +162,25 @@ void DailyWidget::update_widget_info(const QVariantMap &new_dataset, const int &
    m_day_of_week->setText(locale.dayName(date.dayOfWeek()));
    m_date->setText(date.toString("dd.MM"));
 
-   m_min_temp_value->setText(new_dataset_temp["min"].toString() + "°C");
-   m_max_temp_value->setText(new_dataset_temp["max"].toString() + "°C");
+   m_min_temp_value->setText(QString("%1°C").arg(round(new_dataset_temp["min"].toDouble())));
+   m_max_temp_value->setText(QString("%1°C").arg(round(new_dataset_temp["max"].toDouble())));
    m_pressure_value->setText(QString("%1мм рт.ст").arg(round(new_dataset["pressure"].toDouble() / 1.333)));
    m_humidity_value->setText(new_dataset["humidity"].toString() + "%");
-   m_dew_point_value->setText(new_dataset["dew_point"].toString() + "°C");
+   m_dew_point_value->setText(QString("%1°C").arg(round(new_dataset["dew_point"].toDouble())));
    m_uv_ix_value->setText(new_dataset["uvi"].toString());
    m_clouds_value->setText(new_dataset["clouds"].toString() + "%");
    m_visibility_value->setText(QString("%1км").arg(new_dataset["visibility"].toDouble() / 1000));
    m_wind_speed_value->setText(new_dataset["wind_speed"].toString() + "м/с");
    m_wind_deg_value->setText(getWindDirection(new_dataset["wind_deg"].toInt()));
 
-   m_morn_temp_value->setText(new_dataset_temp["morn"].toString() + "°C");
-   m_day_temp_value->setText(new_dataset_temp["day"].toString() + "°C");
-   m_eve_temp_value->setText(new_dataset_temp["eve"].toString() + "°C");
-   m_night_temp_value->setText(new_dataset_temp["night"].toString() + "°C");
-   m_morn_fl_value->setText(new_dataset_fl["morn"].toString() + "°C");
-   m_day_fl_value->setText(new_dataset_fl["day"].toString() + "°C");
-   m_eve_fl_value->setText(new_dataset_fl["eve"].toString() + "°C");
-   m_night_fl_value->setText(new_dataset_fl["night"].toString() + "°C");
+   m_morn_temp_value->setText(QString("%1°C").arg(round(new_dataset_temp["morn"].toDouble())));
+   m_day_temp_value->setText(QString("%1°C").arg(round(new_dataset_temp["day"].toDouble())));
+   m_eve_temp_value->setText(QString("%1°C").arg(round(new_dataset_temp["eve"].toDouble())));
+   m_night_temp_value->setText(QString("%1°C").arg(round(new_dataset_temp["night"].toDouble())));
+   m_morn_fl_value->setText(QString("%1°C").arg(round(new_dataset_fl["morn"].toDouble())));
+   m_day_fl_value->setText(QString("%1°C").arg(round(new_dataset_fl["day"].toDouble())));
+   m_eve_fl_value->setText(QString("%1°C").arg(round(new_dataset_fl["eve"].toDouble())));
+   m_night_fl_value->setText(QString("%1°C").arg(round(new_dataset_fl["night"].toDouble())));
 
 
 }

@@ -93,11 +93,11 @@ CurrentForecast::CurrentForecast(QWidget *parent) : QFrame(parent)
 void CurrentForecast::update_widget_info(const QVariantMap &new_dataset, const int &offset) {
     QTime time = QDateTime::fromSecsSinceEpoch(new_dataset["dt"].toLongLong(), Qt::OffsetFromUTC, offset).time();
     m_time->setText(time.toString("hh:mm"));
-    m_temp_value->setText(new_dataset["temp"].toString() + "°C");
-    m_feels_like_value->setText(new_dataset["feels_like"].toString() + "°C");
+    m_temp_value->setText(QString("%1°C").arg(round(new_dataset["temp"].toDouble())));
+    m_feels_like_value->setText(QString("%1°C").arg(round(new_dataset["feels_like"].toDouble())));
     m_pressure_value->setText(QString("%1мм рт.ст").arg(round(new_dataset["pressure"].toDouble() / 1.333)));
     m_humidity_value->setText(new_dataset["humidity"].toString() + "%");
-    m_dew_point_value->setText(new_dataset["dew_point"].toString() + "°C");
+    m_dew_point_value->setText(QString("%1°C").arg(round(new_dataset["dew_point"].toDouble())));
     m_uv_ix_value->setText(new_dataset["uvi"].toString());
     m_clouds_value->setText(new_dataset["clouds"].toString() + "%");
     m_visibility_value->setText(QString("%1км").arg(new_dataset["visibility"].toDouble() / 1000));
