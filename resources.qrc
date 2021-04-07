@@ -1,0 +1,4 @@
+<RCC>
+    <qresource prefix="/weather_states"/>
+    <qresource prefix="/icons"/>
+</RCC>
