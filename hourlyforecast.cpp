@@ -112,7 +112,7 @@ void HourlyForecast::update_widget_info(const QVariantMap &new_dataset, const in
     m_uv_ix_value->setText(new_dataset["uvi"].toString());
     m_clouds_value->setText(new_dataset["clouds"].toString() + "%");
     m_visibility_value->setText(QString("%1км").arg(new_dataset["visibility"].toDouble() / 1000));
-     m_wind_speed_value->setText(QString("%1м/с").arg(round(new_dataset["wind_speed"].toDouble())));
+    m_wind_speed_value->setText(QString("%1м/с").arg(round(new_dataset["wind_speed"].toDouble())));
     m_wind_deg_value->setText(getWindDirection(new_dataset["wind_deg"].toInt()));
 }
 
