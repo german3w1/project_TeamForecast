@@ -78,16 +78,7 @@ NewLocationDialog::NewLocationDialog(QWidget* parent, QTabWidget* locations) : Q
        locations->addTab(new LocationForecast(locations, lat, lon), label);
         locations->setCurrentIndex(locations->count() - 1);
     }
-/*
-    delete label;
-    delete latitude;
-    delete longitude;
-    delete ok_btn;
-    delete cancel_btn;
-    delete controls_frame;
-    delete controls_layout;
-    delete dialog_layout;
-*/
+
 }
 
 void NewLocationDialog::onLabelChanged(const QString &text){
