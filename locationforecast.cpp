@@ -1,4 +1,5 @@
 #include "locationforecast.h"
+#include <editlocationdialog.h>
 
 LocationForecast::LocationForecast(QWidget* parent, const QString &lat, const QString &lon) : QFrame(parent)
 {
@@ -10,29 +11,33 @@ LocationForecast::LocationForecast(QWidget* parent, const QString &lat, const QS
     control_panel_frame = new QFrame(this);
     control_panel_frame->setContentsMargins(2,0,2,0);
     control_panel_frame->setStyleSheet("QFrame {background: #FFAB40; border: 0px; border-radius: 12px; font: 16px;}"
+                                       "QPushButton {font: bold 14px; background :#FFAB40; color: white; border: 0px; border-radius: 12px;}"
+                                       "QPushButton:pressed {background-color: #FF9800;}"
                                        "QLabel {color: white;}");
     control_panel_layout = new QHBoxLayout(control_panel_frame);
+
+    auto edit = new QPushButton(control_panel_frame);
+    edit->setIcon(QIcon(":/icons/edit.png"));
+    edit->setIconSize(QSize(18, 18));
+    edit->setMaximumSize(30, 30);
+    connect(edit, &QPushButton::clicked, this, &LocationForecast::onEditBtnClicked);
+    control_panel_layout->addWidget(edit, 1);
     latitude = new QLabel(lat, control_panel_frame);
-    control_panel_layout->addWidget(latitude,1);
+    control_panel_layout->addWidget(latitude, 1, Qt::AlignCenter);
     longitude = new QLabel(lon, control_panel_frame);
-    control_panel_layout->addWidget(longitude,1);
+    control_panel_layout->addWidget(longitude, 1, Qt::AlignCenter);
     last_update_time = new QLabel("Последнее успешное обновление", this);
     last_update_time->setStyleSheet("QLabel {color: white; font: bold 16px;}");
-    control_panel_layout->addWidget(last_update_time, 2);
+    control_panel_layout->addWidget(last_update_time, 3, Qt::AlignRight);
     last_update_time_val = new QLabel(this);
     control_panel_layout->addWidget(last_update_time_val,2, Qt::Alignment(Qt::AlignCenter));
     update_btn = new QPushButton("Обновить", control_panel_frame);
     update_btn->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-    update_btn->setStyleSheet("QPushButton {font: bold 14px; color: white; border: 0px; border-radius: 12px;}"
-                              "QPushButton::pressed {background-color: #FF9800;}");
     connect(update_btn, &QPushButton::clicked, this, &LocationForecast::onUpdateBtnClicked);
-    control_panel_layout->addWidget(update_btn,1);
+    control_panel_layout->addWidget(update_btn, 1);
     control_panel_frame->setLayout(control_panel_layout);
     control_panel_frame->setFixedHeight(control_panel_frame->height() + 20);
     main_layout->addWidget(control_panel_frame);
-
-
-
 
     forecasts_frame = new QFrame(this);
     forecasts_frame->setContentsMargins(0,0,0,0);
@@ -55,6 +60,12 @@ LocationForecast::LocationForecast(QWidget* parent, const QString &lat, const QS
 
 void LocationForecast::onUpdateBtnClicked(){
     updateWeatherInfo(latitude->text(), longitude->text());
+}
+
+void LocationForecast::onEditBtnClicked(){
+    bool need_update = false;
+    EditLocationDialog(this, qobject_cast<QTabWidget*>(parentWidget()->parentWidget()), need_update);
+    if (need_update) updateWeatherInfo(latitude->text(), longitude->text());
 }
 
 void LocationForecast::updateWeatherInfo(const QString &lat, const QString &lon){
@@ -96,4 +107,20 @@ void LocationForecast::onRequestProcessed(QNetworkReply *reply){
      reply->deleteLater();
      update_btn->setEnabled(true);
      update_btn->setText("Обновить");
+}
+
+QString LocationForecast::getLat(){
+    return latitude->text();
+}
+
+QString LocationForecast::getLon(){
+    return longitude->text();
+}
+
+void LocationForecast::setLat(const QString &lat) {
+    latitude->setText(lat);
+}
+
+void LocationForecast::setLon(const QString &lon) {
+    longitude->setText(lon);
 }

@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     auto main_layout = new QVBoxLayout(this);
     main_layout->setContentsMargins(0,0,0,0);
 
+
     locations = new QTabWidget(this);
     locations->setMovable(true);
     locations->tabBar()->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);

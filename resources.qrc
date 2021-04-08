@@ -3,5 +3,6 @@
     <qresource prefix="/icons">
         <file>close.png</file>
         <file>close_hover.png</file>
+        <file>edit.png</file>
     </qresource>
 </RCC>

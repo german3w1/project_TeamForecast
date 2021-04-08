@@ -18,11 +18,16 @@
 #include <mainforecast.h>
 #include <dailyforecast.h>
 
+
 class LocationForecast : public QFrame
 {
     Q_OBJECT
 public:
     LocationForecast(QWidget* parent, const QString &lat, const QString &lon);
+    QString getLat();
+    QString getLon();
+    void setLat(const QString &lat);
+    void setLon(const QString &lon);
 private:
     bool previous_update_failed;
     QVBoxLayout *main_layout;
@@ -44,6 +49,7 @@ private:
 private slots:
     void onRequestProcessed(QNetworkReply *reply);
     void onUpdateBtnClicked();
+    void onEditBtnClicked();
 };
 
 #endif // LOCATIONFORECAST_H
