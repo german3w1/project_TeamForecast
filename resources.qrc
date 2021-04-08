@@ -1,4 +1,7 @@
 <RCC>
     <qresource prefix="/weather_states"/>
-    <qresource prefix="/icons"/>
+    <qresource prefix="/icons">
+        <file>close.png</file>
+        <file>close_hover.png</file>
+    </qresource>
 </RCC>

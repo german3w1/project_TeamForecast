@@ -16,7 +16,7 @@ public:
     ~MainWindow();
 private slots:
     void newLocationRequest();
-
+    void deleteLocationRequest(int index);
 private:
     QTabWidget *locations;
 };

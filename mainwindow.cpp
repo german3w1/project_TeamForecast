@@ -30,8 +30,13 @@ MainWindow::MainWindow(QWidget *parent)
     add_new_frame->setFixedHeight(add_new_frame->height());
 
     locations->setCornerWidget(add_new_frame, Qt::TopRightCorner);
-    locations->setStyleSheet(QString("QTabBar::tab {height: %1;}").arg(add_new_frame->height()));
+    locations->setTabsClosable(true);
+    locations->setStyleSheet(QString("QTabBar::tab {height: %1;}"
+                             "QTabBar::close-button {image: url(:/icons/close.png);}"
+                             "QTabBar::close-button:hover {image: url(:/icons/close_hover.png);}").arg(add_new_frame->height()));
+    connect(locations, &QTabWidget::tabCloseRequested, this, &MainWindow::deleteLocationRequest);
     main_layout->addWidget(locations);
+
     setLayout(main_layout);
 }
 
@@ -42,4 +47,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::newLocationRequest(){
    NewLocationDialog(this, locations);
+}
+
+void MainWindow::deleteLocationRequest(int index){
+    delete locations->widget(index);
 }

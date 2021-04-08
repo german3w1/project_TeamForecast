@@ -65,9 +65,6 @@ void LocationForecast::updateWeatherInfo(const QString &lat, const QString &lon)
     QString url = "https://api.openweathermap.org/data/2.5/onecall?lat=%1&lon=%2&exclude=minutely,alerts&units=metric&appid=%3";
     url = url.arg(lat, lon, api_key);
     network_manager->get(QNetworkRequest(QUrl(url)));
-
-    qDebug() << QSslSocket::supportsSsl() << QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
-    qDebug() << url;
 }
 
 void LocationForecast::onRequestProcessed(QNetworkReply *reply){
