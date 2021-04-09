@@ -33,8 +33,8 @@ MainWindow::MainWindow(QWidget *parent)
     locations->setCornerWidget(add_new_frame, Qt::TopRightCorner);
     locations->setTabsClosable(true);
     locations->setStyleSheet(QString("QTabBar::tab {height: %1;}"
-                             "QTabBar::close-button {image: url(:/icons/close.png);}"
-                             "QTabBar::close-button:hover {image: url(:/icons/close_hover.png);}").arg(add_new_frame->height()));
+                             "QTabBar::close-button {image: url(:/icons/close);}"
+                             "QTabBar::close-button:hover {image: url(:/icons/close_hover);}").arg(add_new_frame->height()));
     connect(locations, &QTabWidget::tabCloseRequested, this, &MainWindow::deleteLocationRequest);
     main_layout->addWidget(locations);
 

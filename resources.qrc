@@ -1,8 +1,18 @@
 <RCC>
-    <qresource prefix="/weather_states"/>
     <qresource prefix="/icons">
-        <file>icons/close.png</file>
-        <file>icons/close_hover.png</file>
-        <file>icons/edit.png</file>
+        <file alias="close">icons/close.png</file>
+        <file alias="close_hover">icons/close_hover.png</file>
+        <file alias="edit">icons/edit.png</file>
+    </qresource>
+    <qresource prefix="/weather_states">
+        <file alias="scattered_clouds">icons/scattered_clouds.png</file>
+        <file alias="clear_sky">icons/clear_sky.png</file>
+        <file alias="few_clouds">icons/few_clouds.png</file>
+        <file alias="broken_clouds">icons/broken_clouds.png</file>
+        <file alias="rain">icons/rain.png</file>
+        <file alias="shower_rain">icons/shower_rain.png</file>
+        <file alias="thunderstorm">icons/thunderstorm.png</file>
+        <file alias="mist">icons/mist.png</file>
+        <file alias="snow">icons/snow.png</file>
     </qresource>
 </RCC>

@@ -5,7 +5,7 @@ LocationForecast::LocationForecast(QWidget* parent, const QString &lat, const QS
 {
     setContentsMargins(0,0,0,0);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    setStyleSheet("QFrame {background:white;}");
+    //setStyleSheet("QFrame {background:white;}");
     main_layout = new QVBoxLayout(this);
 
     control_panel_frame = new QFrame(this);
@@ -17,7 +17,7 @@ LocationForecast::LocationForecast(QWidget* parent, const QString &lat, const QS
     control_panel_layout = new QHBoxLayout(control_panel_frame);
 
     auto edit = new QPushButton(control_panel_frame);
-    edit->setIcon(QIcon(":/icons/edit.png"));
+    edit->setIcon(QIcon(":/icons/edit"));
     edit->setIconSize(QSize(18, 18));
     edit->setMaximumSize(30, 30);
     connect(edit, &QPushButton::clicked, this, &LocationForecast::onEditBtnClicked);

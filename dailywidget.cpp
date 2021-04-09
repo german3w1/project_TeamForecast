@@ -12,11 +12,14 @@ DailyWidget::DailyWidget(QWidget *parent) : QWidget(parent)
 
     m_day_of_week = new QLabel(this);
     m_day_of_week->setStyleSheet("QLabel {font: bold 20px; color: white}");
-    grid_layout->addWidget(m_day_of_week, 0, 0, 2, 2);
+    grid_layout->addWidget(m_day_of_week, 0, 0, 2, 1);
 
     m_date = new QLabel(this);
     m_date->setStyleSheet("QLabel {font: bold 20px; color: white; }");
-    grid_layout->addWidget(m_date, 2, 0, 2, 2);
+    grid_layout->addWidget(m_date, 2, 0, 2, 1);
+
+    m_icon = new QLabel(this);
+    grid_layout->addWidget(m_icon, 0, 1, 4, 2, Qt::AlignRight);
 
     m_min_temp = new QLabel("Минимум", this);
     m_min_temp->setStyleSheet("QLabel {font: bold 20px; color: white;}");
@@ -153,8 +156,11 @@ void DailyWidget::update_widget_info(const QVariantMap &new_dataset, const int &
    QVariantMap new_dataset_fl = new_dataset["feels_like"].toMap();
    QDate date = QDateTime::fromSecsSinceEpoch(new_dataset["dt"].toLongLong(), Qt::OffsetFromUTC, offset).date();
    QLocale locale = QLocale::system();
-   m_day_of_week->setText(locale.dayName(date.dayOfWeek()));
+   m_day_of_week->setText(locale.dayName(date.dayOfWeek(), QLocale::ShortFormat));
    m_date->setText(date.toString("dd.MM"));
+
+   //заглушка
+   m_icon->setPixmap(QIcon(":/weather_states/pouring.png").pixmap(QSize(48, 48)));
 
    m_min_temp_value->setText(QString("%1°C").arg(round(new_dataset_temp["min"].toDouble())));
    m_max_temp_value->setText(QString("%1°C").arg(round(new_dataset_temp["max"].toDouble())));

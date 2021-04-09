@@ -13,6 +13,9 @@ CurrentForecast::CurrentForecast(QWidget *parent) : QFrame(parent)
     m_time->setStyleSheet("QLabel {font: bold 44px; color: white}");
     grid_layout->addWidget(m_time, 0, 0, 4, 2, Qt::Alignment(Qt::AlignVCenter));
 
+    m_icon = new QLabel(this);
+    grid_layout->addWidget(m_icon, 0, 2, 4, 1, Qt::AlignCenter);
+
     m_temp = new QLabel("Температура", this);
     m_temp->setStyleSheet("QLabel {font: bold 20px; color: white;}");
     grid_layout->addWidget(m_temp, 0, 3, 2, 2, Qt::Alignment(Qt::AlignRight));
@@ -86,6 +89,10 @@ CurrentForecast::CurrentForecast(QWidget *parent) : QFrame(parent)
 void CurrentForecast::update_widget_info(const QVariantMap &new_dataset, const int &offset) {
     QTime time = QDateTime::fromSecsSinceEpoch(new_dataset["dt"].toLongLong(), Qt::OffsetFromUTC, offset).time();
     m_time->setText(time.toString("hh:mm"));
+
+    //заглушка
+    m_icon->setPixmap(QIcon(":/weather_states/thunderstorm").pixmap(QSize(64, 64)));
+
     m_temp_value->setText(QString("%1°C").arg(round(new_dataset["temp"].toDouble())));
     m_feels_like_value->setText(QString("%1°C").arg(round(new_dataset["feels_like"].toDouble())));
     m_pressure_value->setText(QString("%1мм рт.ст").arg(round(new_dataset["pressure"].toDouble() / 1.333)));

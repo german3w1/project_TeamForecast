@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QGridLayout>
 #include <QJsonObject>
+#include <QIcon>
 
 class CurrentForecast : public QFrame
 {
@@ -16,6 +17,7 @@ public:
 private:
     QGridLayout* grid_layout;
     QLabel *m_time;
+    QLabel *m_icon;
    // QLabel *m_sunrise;
    // QLabel *m_sunset;
     QLabel *m_temp;

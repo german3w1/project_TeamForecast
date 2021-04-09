@@ -29,6 +29,7 @@ private:
     QGridLayout* grid_layout;
     QLabel *m_time;
     QLabel *m_day;
+    QLabel *m_icon;
     QLabel *m_temp;
     QLabel *m_temp_value;
     QLabel *m_feels_like;

@@ -26,6 +26,7 @@ private:
     QGridLayout* grid_layout;
     QLabel *m_day_of_week;
     QLabel *m_date;
+    QLabel *m_icon;
    // QLabel *m_sunrise;
    // QLabel *m_sunset;
     QLabel *m_min_temp;
