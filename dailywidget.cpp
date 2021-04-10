@@ -1,5 +1,5 @@
 #include "dailywidget.h"
-
+#include <weathertools.h>
 
 DailyWidget::DailyWidget(QWidget *parent) : QWidget(parent)
 {
@@ -159,8 +159,8 @@ void DailyWidget::update_widget_info(const QVariantMap &new_dataset, const int &
    m_day_of_week->setText(locale.dayName(date.dayOfWeek(), QLocale::ShortFormat));
    m_date->setText(date.toString("dd.MM"));
 
-   //заглушка
-   m_icon->setPixmap(QIcon(":/weather_states/pouring.png").pixmap(QSize(48, 48)));
+   QVariantMap weather = new_dataset["weather"].toList()[0].toMap();
+   m_icon->setPixmap(WeatherTools::getWeatherIcon(weather["id"].toInt()));
 
    m_min_temp_value->setText(QString("%1°C").arg(round(new_dataset_temp["min"].toDouble())));
    m_max_temp_value->setText(QString("%1°C").arg(round(new_dataset_temp["max"].toDouble())));
@@ -173,7 +173,7 @@ void DailyWidget::update_widget_info(const QVariantMap &new_dataset, const int &
        m_visibility_value->setText(QString("%1км").arg(visibility / 1000));
    else
        m_visibility_value->setText(QString("%1м").arg(visibility));
-   auto wind_direction = getWindDirection(new_dataset["wind_deg"].toInt());
+   auto wind_direction = WeatherTools::getWindDirection(new_dataset["wind_deg"].toInt());
    auto wind_speed = round(new_dataset["wind_speed"].toDouble());
    m_wind_value->setText(QString::number(wind_speed) + "м/с, " + wind_direction);
 
@@ -187,17 +187,6 @@ void DailyWidget::update_widget_info(const QVariantMap &new_dataset, const int &
    m_night_fl_value->setText(QString("%1°C").arg(round(new_dataset_fl["night"].toDouble())));
 
 
-}
-
-QString DailyWidget::getWindDirection(const int &degrees){
-    if (degrees == 0) return "С";
-    else if (0 < degrees && degrees < 90) return "СВ";
-    else if (degrees == 90) return "В";
-    else if (90 < degrees && degrees < 180) return "ЮВ";
-    else if (degrees == 180) return "Ю";
-    else if (180 < degrees && degrees < 270) return "ЮЗ";
-    else if (degrees == 270) return "З";
-    else return "СЗ";
 }
 
 void DailyWidget::maximize(){

@@ -13,7 +13,6 @@ class CurrentForecast : public QFrame
 public:
     CurrentForecast(QWidget *parent);
     void update_widget_info(const QVariantMap &new_dataset, const int &offset);
-    QString getWindDirection(const int &degrees);
 private:
     QGridLayout* grid_layout;
     QLabel *m_time;

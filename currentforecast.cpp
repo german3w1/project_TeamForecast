@@ -1,4 +1,5 @@
 #include "currentforecast.h"
+#include <weathertools.h>
 
 CurrentForecast::CurrentForecast(QWidget *parent) : QFrame(parent)
 {
@@ -90,8 +91,8 @@ void CurrentForecast::update_widget_info(const QVariantMap &new_dataset, const i
     QTime time = QDateTime::fromSecsSinceEpoch(new_dataset["dt"].toLongLong(), Qt::OffsetFromUTC, offset).time();
     m_time->setText(time.toString("hh:mm"));
 
-    //заглушка
-    m_icon->setPixmap(QIcon(":/weather_states/thunderstorm").pixmap(QSize(64, 64)));
+    QVariantMap weather = new_dataset["weather"].toList()[0].toMap();
+    m_icon->setPixmap(WeatherTools::getWeatherIcon(weather["id"].toInt()));
 
     m_temp_value->setText(QString("%1°C").arg(round(new_dataset["temp"].toDouble())));
     m_feels_like_value->setText(QString("%1°C").arg(round(new_dataset["feels_like"].toDouble())));
@@ -104,18 +105,8 @@ void CurrentForecast::update_widget_info(const QVariantMap &new_dataset, const i
         m_visibility_value->setText(QString("%1км").arg(visibility / 1000));
     else
         m_visibility_value->setText(QString("%1м").arg(visibility));
-    auto wind_direction = getWindDirection(new_dataset["wind_deg"].toInt());
+    auto wind_direction = WeatherTools::getWindDirection(new_dataset["wind_deg"].toInt());
     auto wind_speed = round(new_dataset["wind_speed"].toDouble());
     m_wind_value->setText(QString::number(wind_speed) + "м/с, " + wind_direction);
 }
 
-QString CurrentForecast::getWindDirection(const int &degrees){
-    if (degrees == 0) return "Северный";
-    else if (0 < degrees && degrees < 90) return "Северо-Восточный";
-    else if (degrees == 90) return "Восточный";
-    else if (90 < degrees && degrees < 180) return "Юго-Восточный";
-    else if (degrees == 180) return "Южный";
-    else if (180 < degrees && degrees < 270) return "Юго-Западный";
-    else if (degrees == 270) return "Западный";
-    else return "Северо-Западный";
-}

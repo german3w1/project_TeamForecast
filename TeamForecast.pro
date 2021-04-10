@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    basiclocationdialog.cpp \
     currentforecast.cpp \
     dailyforecast.cpp \
     dailywidget.cpp \
@@ -18,9 +19,11 @@ SOURCES += \
     main.cpp \
     mainforecast.cpp \
     mainwindow.cpp \
-    newlocationdialog.cpp
+    newlocationdialog.cpp \
+    weathertools.cpp
 
 HEADERS += \
+    basiclocationdialog.h \
     currentforecast.h \
     dailyforecast.h \
     dailywidget.h \
@@ -29,7 +32,8 @@ HEADERS += \
     locationforecast.h \
     mainforecast.h \
     mainwindow.h \
-    newlocationdialog.h
+    newlocationdialog.h \
+    weathertools.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

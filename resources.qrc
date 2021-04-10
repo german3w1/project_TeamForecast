@@ -14,5 +14,6 @@
         <file alias="thunderstorm">icons/thunderstorm.png</file>
         <file alias="mist">icons/mist.png</file>
         <file alias="snow">icons/snow.png</file>
+        <file alias="overcast_clouds">icons/overcast_clouds.png</file>
     </qresource>
 </RCC>

@@ -19,7 +19,6 @@ public:
     HourlyForecast(QWidget *parent);
     ~HourlyForecast();
     void update_widget_info(const QVariantMap &new_dataset, const int &today, const int &offset);
-    QString getWindDirection(const int &degrees);
     void minimize();
     void maximize();
 signals:
