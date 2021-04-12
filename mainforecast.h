@@ -23,7 +23,7 @@ private:
     CurrentForecast *m_current_widget;
     HourlyForecast *m_hourly_widgets[47];
 private slots:
-    void onHourlyWidgetPressed(HourlyForecast *widget);
+    void onHourlyWidgetPressed(ExpandingWeatherWidget *widget);
 };
 
 #endif // MAINFORECAST_H

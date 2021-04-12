@@ -1,13 +1,17 @@
 #include "locationforecast.h"
 #include <editlocationdialog.h>
 
-LocationForecast::LocationForecast(QWidget* parent, const QString &lat, const QString &lon) : QFrame(parent)
+LocationForecast::LocationForecast(QWidget* parent) : QFrame(parent)
 {
     setContentsMargins(0,0,0,0);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     //setStyleSheet("QFrame {background:white;}");
     main_layout = new QVBoxLayout(this);
+    setLayout(main_layout);
 
+}
+
+void LocationForecast::init(const QString &lat, const QString &lon) {
     control_panel_frame = new QFrame(this);
     control_panel_frame->setContentsMargins(2,0,2,0);
     control_panel_frame->setStyleSheet("QFrame {background: #FFAB40; border: 0px; border-radius: 12px; font: 16px;}"
@@ -15,47 +19,50 @@ LocationForecast::LocationForecast(QWidget* parent, const QString &lat, const QS
                                        "QPushButton:pressed {background-color: #FF9800;}"
                                        "QLabel {color: white;}");
     control_panel_layout = new QHBoxLayout(control_panel_frame);
+    control_panel_frame->setLayout(control_panel_layout);
+    main_layout->addWidget(control_panel_frame);
 
-    auto edit = new QPushButton(control_panel_frame);
+    auto edit = new QPushButton;
     edit->setIcon(QIcon(":/icons/edit"));
     edit->setIconSize(QSize(18, 18));
     edit->setMaximumSize(30, 30);
     connect(edit, &QPushButton::clicked, this, &LocationForecast::onEditBtnClicked);
-    control_panel_layout->addWidget(edit, 1);
-    latitude = new QLabel(lat, control_panel_frame);
-    control_panel_layout->addWidget(latitude, 1, Qt::AlignCenter);
-    longitude = new QLabel(lon, control_panel_frame);
-    control_panel_layout->addWidget(longitude, 1, Qt::AlignCenter);
-    last_update_time = new QLabel("Последнее успешное обновление", this);
+    latitude = new QLabel(lat);
+    longitude = new QLabel(lon);
+    last_update_time = new QLabel("Последнее успешное обновление");
     last_update_time->setStyleSheet("QLabel {color: white; font: bold 16px;}");
-    control_panel_layout->addWidget(last_update_time, 3, Qt::AlignRight);
-    last_update_time_val = new QLabel(this);
-    control_panel_layout->addWidget(last_update_time_val,2, Qt::Alignment(Qt::AlignCenter));
+    last_update_time_val = new QLabel;
     update_btn = new QPushButton("Обновить", control_panel_frame);
     update_btn->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
     connect(update_btn, &QPushButton::clicked, this, &LocationForecast::onUpdateBtnClicked);
+
+    control_panel_layout->addWidget(edit, 1);
+    control_panel_layout->addWidget(latitude, 1, Qt::AlignCenter);
+    control_panel_layout->addWidget(longitude, 1, Qt::AlignCenter);
+    control_panel_layout->addWidget(last_update_time, 3, Qt::AlignRight);
+    control_panel_layout->addWidget(last_update_time_val, 2, Qt::Alignment(Qt::AlignCenter));
     control_panel_layout->addWidget(update_btn, 1);
-    control_panel_frame->setLayout(control_panel_layout);
     control_panel_frame->setFixedHeight(control_panel_frame->height() + 20);
-    main_layout->addWidget(control_panel_frame);
+
 
     forecasts_frame = new QFrame(this);
     forecasts_frame->setContentsMargins(0,0,0,0);
     forecasts_frame->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     forecasts_layout = new QHBoxLayout(forecasts_frame);
+    forecasts_frame->setLayout(forecasts_layout);
     current_and_hourly = new MainForecast(this);
     daily = new DailyForecast(this);
     forecasts_layout->addWidget(current_and_hourly);
     forecasts_layout->addWidget(daily);
-    forecasts_frame->setLayout(forecasts_layout);
     main_layout->addWidget(forecasts_frame);
 
-    setLayout(main_layout);
     previous_update_failed = false;
 
     network_manager = new QNetworkAccessManager(this);
     connect(network_manager, &QNetworkAccessManager::finished, this, &LocationForecast::onRequestProcessed);
     updateWeatherInfo(lat, lon);
+
+    //parent()->parent()->parent()->dumpObjectTree();
 }
 
 void LocationForecast::onUpdateBtnClicked(){

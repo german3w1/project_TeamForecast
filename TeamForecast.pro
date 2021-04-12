@@ -14,6 +14,7 @@ SOURCES += \
     dailyforecast.cpp \
     dailywidget.cpp \
     editlocationdialog.cpp \
+    expandingweatherwidget.cpp \
     hourlyforecast.cpp \
     locationforecast.cpp \
     main.cpp \
@@ -28,6 +29,7 @@ HEADERS += \
     dailyforecast.h \
     dailywidget.h \
     editlocationdialog.h \
+    expandingweatherwidget.h \
     hourlyforecast.h \
     locationforecast.h \
     mainforecast.h \

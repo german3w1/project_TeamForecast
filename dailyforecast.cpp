@@ -11,7 +11,7 @@ DailyForecast::DailyForecast(QWidget *parent): QFrame(parent)
     setStyleSheet("QFrame {background: white; border: 0px; border-radius: 20px;}");
 
     m_scroll_area = new QScrollArea(this);
-    m_scroll_area->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+    m_scroll_area->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_scroll_frame = new QFrame(m_scroll_area);
     m_scroll_frame->setContentsMargins(0,0,0,0);
     m_scroll_frame_layout = new QVBoxLayout(m_scroll_frame);
@@ -41,10 +41,8 @@ void DailyForecast::update_weather_info(const QList<QVariant> &new_daily_dataset
         m_daily_widgets[i]->update_widget_info(new_daily_dataset[i].toMap(), offset);
 }
 
-void DailyForecast::onWidgetPressed(DailyWidget *widget){
+void DailyForecast::onWidgetPressed(ExpandingWeatherWidget *widget){
     qDebug() << widget << "pressed";
-
-    m_scroll_area->ensureWidgetVisible(widget);
 }
 
 DailyForecast::~DailyForecast(){

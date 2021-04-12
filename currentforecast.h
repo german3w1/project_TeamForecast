@@ -12,8 +12,11 @@ class CurrentForecast : public QFrame
 {
 public:
     CurrentForecast(QWidget *parent);
+    void setTheme();
     void update_widget_info(const QVariantMap &new_dataset, const int &offset);
 private:
+    QLabel* generateBoldLabel(const QString &text);
+    QLabel* generatePaleLabel();
     QGridLayout* grid_layout;
     QLabel *m_time;
     QLabel *m_icon;

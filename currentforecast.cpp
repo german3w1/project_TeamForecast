@@ -3,88 +3,73 @@
 
 CurrentForecast::CurrentForecast(QWidget *parent) : QFrame(parent)
 {
-    grid_layout = new QGridLayout(this);
-    setFixedSize(440, 180);
+    grid_layout = new QGridLayout;
+    setLayout(grid_layout);
+    setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
     setContentsMargins(4,4,4,4);
     setStyleSheet("QFrame {background: #FFAB40; border: 0px; border-radius: 16px;}");
-    auto labels_style = QString("QLabel {font: bold 14px; color: white;}");
-    auto values_style = QString("QLabel {font: 14px; color: white;}");
 
-    m_time = new QLabel(this);
+    m_time = new QLabel;
     m_time->setStyleSheet("QLabel {font: bold 44px; color: white}");
-    grid_layout->addWidget(m_time, 0, 0, 4, 2, Qt::Alignment(Qt::AlignVCenter));
-
-    m_icon = new QLabel(this);
-    grid_layout->addWidget(m_icon, 0, 2, 4, 1, Qt::AlignCenter);
-
-    m_temp = new QLabel("Температура", this);
+    m_icon = new QLabel;
+    m_temp = new QLabel("Температура");
     m_temp->setStyleSheet("QLabel {font: bold 20px; color: white;}");
-    grid_layout->addWidget(m_temp, 0, 3, 2, 2, Qt::Alignment(Qt::AlignRight));
-    m_temp_value = new QLabel(this);
+    m_temp_value = new QLabel;
     m_temp_value->setStyleSheet("QLabel {font: 20px; color: white;}");
-    grid_layout->addWidget(m_temp_value, 0, 5, 2, 1, Qt::Alignment(Qt::AlignRight));
-
-    m_feels_like = new QLabel("Ощущается", this);
+    m_feels_like = new QLabel("Ощущается");
     m_feels_like->setStyleSheet("QLabel {font: bold 20px; color: white;}");
-    grid_layout->addWidget(m_feels_like, 2, 3, 2, 2, Qt::Alignment(Qt::AlignRight));
-    m_feels_like_value = new QLabel(this);
+    m_feels_like_value = new QLabel;
     m_feels_like_value->setStyleSheet("QLabel {font: 20px; color: white;}");
-    grid_layout->addWidget(m_feels_like_value, 2, 5, 2, 1, Qt::Alignment(Qt::AlignRight));
+    blank_space = new QLabel;
 
-    blank_space = new QLabel(this);
-    //blank_space->setPixmap(QPixmap(":/icons/white_line.PNG").scaled(430, 1));
-    grid_layout->addWidget(blank_space, 4, 0, 1, 6);
+    m_pressure = generateBoldLabel("Давление");
+    m_wind = generateBoldLabel("Ветер");
+    m_humidity = generateBoldLabel("Влажность");
+    m_clouds = generateBoldLabel("Облачность");
+    m_dew_point =generateBoldLabel("Точка росы");
+    m_visibility = generateBoldLabel("Видимость");
+    m_uv_ix = generateBoldLabel("УФ-индекс");
+    m_pressure_value = generatePaleLabel();
+    m_wind_value = generatePaleLabel();
+    m_humidity_value = generatePaleLabel();
+    m_clouds_value = generatePaleLabel();
+    m_dew_point_value = generatePaleLabel();
+    m_visibility_value = generatePaleLabel();
+    m_uv_ix_value = generatePaleLabel();
 
-    m_pressure = new QLabel("Давление", this);
-    m_pressure->setStyleSheet(labels_style);
+    grid_layout->addWidget(m_time, 0, 0, 4, 2, Qt::Alignment(Qt::AlignVCenter));
+    grid_layout->addWidget(m_icon, 0, 2, 4, 1, Qt::AlignCenter);  
+    grid_layout->addWidget(m_temp, 0, 3, 2, 2, Qt::Alignment(Qt::AlignRight));
+    grid_layout->addWidget(m_temp_value, 0, 5, 2, 1, Qt::Alignment(Qt::AlignRight));  
+    grid_layout->addWidget(m_feels_like, 2, 3, 2, 2, Qt::Alignment(Qt::AlignRight));
+    grid_layout->addWidget(m_feels_like_value, 2, 5, 2, 1, Qt::Alignment(Qt::AlignRight));   
+    grid_layout->addWidget(blank_space, 4, 0, 1, 6);    
     grid_layout->addWidget(m_pressure, 5, 0, 1, 1);
-    m_pressure_value = new QLabel(this);
-    m_pressure_value->setStyleSheet(values_style);
-    grid_layout->addWidget(m_pressure_value, 5, 1, 1, 2);
-
-    m_wind = new QLabel("Ветер", this);
-    m_wind->setStyleSheet(labels_style);
+    grid_layout->addWidget(m_pressure_value, 5, 1, 1, 2);   
     grid_layout->addWidget(m_wind, 5, 3, 1, 1);
-    m_wind_value = new QLabel(this);
-    m_wind_value->setStyleSheet(values_style);
     grid_layout->addWidget(m_wind_value, 5, 4, 1, 2);
-
-    m_humidity = new QLabel("Влажность", this);
-    m_humidity->setStyleSheet(labels_style);
     grid_layout->addWidget(m_humidity, 6, 0);
-    m_humidity_value = new QLabel(this);
-    m_humidity_value->setStyleSheet(values_style);
     grid_layout->addWidget(m_humidity_value, 6, 1);
-
-    m_clouds = new QLabel("Облачность", this);
-    m_clouds->setStyleSheet(labels_style);
     grid_layout->addWidget(m_clouds, 6, 2);
-    m_clouds_value = new QLabel(this);
-    m_clouds_value->setStyleSheet(values_style);
     grid_layout->addWidget(m_clouds_value, 6, 3);
-
-    m_dew_point = new QLabel("Точка росы", this);
-    m_dew_point->setStyleSheet(labels_style);
     grid_layout->addWidget(m_dew_point, 6, 4);
-    m_dew_point_value = new QLabel(this);
-    m_dew_point_value->setStyleSheet(values_style);
     grid_layout->addWidget(m_dew_point_value, 6, 5);
-
-    m_visibility = new QLabel("Видимость", this);
-    m_visibility->setStyleSheet(labels_style);
     grid_layout->addWidget(m_visibility, 7, 0);
-    m_visibility_value = new QLabel(this);
-    m_visibility_value->setStyleSheet(values_style);
     grid_layout->addWidget(m_visibility_value, 7, 1);
-
-    m_uv_ix = new QLabel("УФ-индекс", this);
-    m_uv_ix->setStyleSheet(labels_style);
     grid_layout->addWidget(m_uv_ix, 7, 2);
-    m_uv_ix_value = new QLabel(this);
-    m_uv_ix_value->setStyleSheet(values_style);
     grid_layout->addWidget(m_uv_ix_value, 7, 3);
+}
 
-    setLayout(grid_layout);
+QLabel* CurrentForecast::generateBoldLabel(const QString &text){
+    QLabel* label = new QLabel(text);
+    label->setStyleSheet("QLabel {font: bold 14px; color: white;}");
+    return label;
+}
+
+QLabel* CurrentForecast::generatePaleLabel(){
+    QLabel* label = new QLabel;
+    label->setStyleSheet("QLabel {font: 14px; color: white;}");
+    return label;
 }
 
 void CurrentForecast::update_widget_info(const QVariantMap &new_dataset, const int &offset) {

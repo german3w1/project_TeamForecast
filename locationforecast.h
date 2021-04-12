@@ -23,7 +23,8 @@ class LocationForecast : public QFrame
 {
     Q_OBJECT
 public:
-    LocationForecast(QWidget* parent, const QString &lat, const QString &lon);
+    LocationForecast(QWidget* parent);
+    void init(const QString &lat, const QString &lon);
     QString getLat();
     QString getLon();
     void setLat(const QString &lat);

@@ -51,5 +51,6 @@ void MainWindow::newLocationRequest(){
 }
 
 void MainWindow::deleteLocationRequest(int index){
-    delete locations->widget(index);
+    locations->widget(index)->deleteLater();
+    dumpObjectTree();
 }

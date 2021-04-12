@@ -12,7 +12,7 @@ EditLocationDialog::EditLocationDialog(QWidget* parent, QTabWidget* locations, b
     latitude_line->setText(location->getLat());
     longitude_line->setText(location->getLon());
 
-    ok_btn->setText("Изменить");
+    ok_btn->setText("Сохранить");
 
     if(exec() == QDialog::Accepted) {
         auto lat = latitude_line->text();

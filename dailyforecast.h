@@ -23,7 +23,7 @@ private:
     QScrollArea *m_scroll_area;
     DailyWidget *m_daily_widgets[8];
 private slots:
-    void onWidgetPressed(DailyWidget *widget);
+    void onWidgetPressed(ExpandingWeatherWidget *widget);
 };
 
 #endif // DAILYFORECAST_H
