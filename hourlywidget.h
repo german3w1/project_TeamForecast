@@ -1,18 +1,15 @@
-#ifndef HOURLYFORECAST_H
-#define HOURLYFORECAST_H
+#ifndef HOURLYWIDGET_H
+#define HOURLYWIDGET_H
 
-
-
-#include <QEvent>
 #include <QDebug>
 #include <QJsonObject>
 #include <expandingweatherwidget.h>
 
-class HourlyForecast : public ExpandingWeatherWidget
+class HourlyWidget : public ExpandingWeatherWidget
 {
 public:
-    HourlyForecast(QWidget *parent);
-    ~HourlyForecast();
+    HourlyWidget(QWidget *parent);
+    ~HourlyWidget();
     void update_widget_info(const QVariantMap &new_dataset, const int &today, const int &offset);
 private:
     QLabel *m_time;
@@ -34,4 +31,4 @@ private:
 
 };
 
-#endif // HOURLYFORECAST_H
+#endif // HOURLYWIDGET_H

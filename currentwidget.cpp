@@ -1,12 +1,10 @@
-#include "hourlyforecast.h"
+#include "currentwidget.h"
 #include <weathertools.h>
 
-HourlyForecast::HourlyForecast(QWidget *parent) : ExpandingWeatherWidget(parent)
+CurrentWidget::CurrentWidget(QWidget *parent) : ExpandingWeatherWidget(parent)
 {
-    m_day = new QLabel;
-    m_day->setStyleSheet("QLabel {font: bold 20px; color: white; }");
     m_time = new QLabel;
-    m_time->setStyleSheet("QLabel {font: bold 20px; color: white}");
+    m_time->setStyleSheet("QLabel {font: bold 44px; color: white}");
     m_icon = new QLabel;
     m_temp = new QLabel("Температура");
     m_temp->setStyleSheet("QLabel {font: bold 20px; color: white;}");
@@ -17,14 +15,6 @@ HourlyForecast::HourlyForecast(QWidget *parent) : ExpandingWeatherWidget(parent)
     m_feels_like_value = new QLabel;
     m_feels_like_value->setStyleSheet("QLabel {font: 20px; color: white;}");
 
-    unhidden_layout->addWidget(m_day, 0, 0, 2, 2);
-    unhidden_layout->addWidget(m_time, 2, 0, 2, 2);
-    unhidden_layout->addWidget(m_icon, 0, 2, 4, 1, Qt::AlignCenter);
-    unhidden_layout->addWidget(m_temp, 0, 3, 2, 2, Qt::Alignment(Qt::AlignRight));
-    unhidden_layout->addWidget(m_temp_value, 0, 5, 2, 1, Qt::Alignment(Qt::AlignRight));
-    unhidden_layout->addWidget(m_feels_like, 2, 3, 2, 2, Qt::Alignment(Qt::AlignRight));
-    unhidden_layout->addWidget(m_feels_like_value, 2, 5, 2, 1, Qt::Alignment(Qt::AlignRight));
-
     m_pressure_value = generatePaleLabel();
     m_wind_value = generatePaleLabel();
     m_humidity_value = generatePaleLabel();
@@ -32,6 +22,13 @@ HourlyForecast::HourlyForecast(QWidget *parent) : ExpandingWeatherWidget(parent)
     m_dew_point_value = generatePaleLabel();
     m_visibility_value = generatePaleLabel();
     m_uv_ix_value = generatePaleLabel();
+
+    unhidden_layout->addWidget(m_time, 0, 0, 4, 2, Qt::Alignment(Qt::AlignVCenter));
+    unhidden_layout->addWidget(m_icon, 0, 2, 4, 1, Qt::AlignCenter);
+    unhidden_layout->addWidget(m_temp, 0, 3, 2, 2, Qt::Alignment(Qt::AlignRight));
+    unhidden_layout->addWidget(m_temp_value, 0, 5, 2, 1, Qt::Alignment(Qt::AlignRight));
+    unhidden_layout->addWidget(m_feels_like, 2, 3, 2, 2, Qt::Alignment(Qt::AlignRight));
+    unhidden_layout->addWidget(m_feels_like_value, 2, 5, 2, 1, Qt::Alignment(Qt::AlignRight));
 
     hidden_layout->addWidget(new QLabel, 0, 0, 1, 6);
     hidden_layout->addWidget(generateBoldLabel("Давление"), 1, 0, 1, 1);
@@ -50,15 +47,9 @@ HourlyForecast::HourlyForecast(QWidget *parent) : ExpandingWeatherWidget(parent)
     hidden_layout->addWidget(m_uv_ix_value, 3, 3);
 }
 
-void HourlyForecast::update_widget_info(const QVariantMap &new_dataset, const int &today, const int &offset) {
-    QDateTime date_time = QDateTime::fromSecsSinceEpoch(new_dataset["dt"].toLongLong(), Qt::OffsetFromUTC, offset);
-    m_time->setText(date_time.time().toString("hh:mm"));
-    if (int diff = date_time.date().day() - today; diff == 0)
-        m_day->setText("Сегодня");
-    else if (diff == 1)
-        m_day->setText("Завтра");
-    else
-        m_day->setText("Послезавтра");
+void CurrentWidget::update_widget_info(const QVariantMap &new_dataset, const int &offset) {
+    QTime time = QDateTime::fromSecsSinceEpoch(new_dataset["dt"].toLongLong(), Qt::OffsetFromUTC, offset).time();
+    m_time->setText(time.toString("hh:mm"));
 
     QVariantMap weather = new_dataset["weather"].toList()[0].toMap();
     m_icon->setPixmap(WeatherTools::getWeatherIcon(weather["id"].toInt()));
@@ -77,10 +68,5 @@ void HourlyForecast::update_widget_info(const QVariantMap &new_dataset, const in
     auto wind_direction = WeatherTools::getWindDirection(new_dataset["wind_deg"].toInt());
     auto wind_speed = round(new_dataset["wind_speed"].toDouble());
     m_wind_value->setText(QString::number(wind_speed) + "м/с, " + wind_direction);
-
 }
 
-
-HourlyForecast::~HourlyForecast(){
-
-}

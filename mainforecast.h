@@ -7,8 +7,8 @@
 #include <QDebug>
 #include <QJsonObject>
 #include <QJsonArray>
-#include "currentforecast.h"
-#include "hourlyforecast.h"
+#include "currentwidget.h"
+#include "hourlywidget.h"
 
 class MainForecast : public QFrame
 {
@@ -20,8 +20,8 @@ private:
     QFrame *m_scroll_frame;
     QVBoxLayout *m_scroll_frame_layout;
     QScrollArea *m_scroll_area;
-    CurrentForecast *m_current_widget;
-    HourlyForecast *m_hourly_widgets[47];
+    CurrentWidget *m_current_widget;
+    HourlyWidget *m_hourly_widgets[47];
 private slots:
     void onHourlyWidgetPressed(ExpandingWeatherWidget *widget);
 };

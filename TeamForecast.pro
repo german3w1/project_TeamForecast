@@ -10,12 +10,12 @@ CONFIG += c++17
 
 SOURCES += \
     basiclocationdialog.cpp \
-    currentforecast.cpp \
+    currentwidget.cpp \
     dailyforecast.cpp \
     dailywidget.cpp \
     editlocationdialog.cpp \
     expandingweatherwidget.cpp \
-    hourlyforecast.cpp \
+    hourlywidget.cpp \
     locationforecast.cpp \
     main.cpp \
     mainforecast.cpp \
@@ -25,12 +25,12 @@ SOURCES += \
 
 HEADERS += \
     basiclocationdialog.h \
-    currentforecast.h \
+    currentwidget.h \
     dailyforecast.h \
     dailywidget.h \
     editlocationdialog.h \
     expandingweatherwidget.h \
-    hourlyforecast.h \
+    hourlywidget.h \
     locationforecast.h \
     mainforecast.h \
     mainwindow.h \
