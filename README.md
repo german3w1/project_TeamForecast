@@ -1,5 +1,6 @@
 # project_TeamForecast
 Weather Client for Windows 10 (ru)
+
 Created with love using Qt Creator 4.14.2 and QMake
 
 ## Deploy:
