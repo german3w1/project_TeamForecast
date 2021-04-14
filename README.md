@@ -1,8 +1,10 @@
 # project_TeamForecast
 Weather Client for Windows 10 (ru)
 
-Qt Creator 4.14.2, QMake
-Use windeployqt.exe to deploy this application on Windows
+Created with Qt Creator 4.14.2, QMake
+
+## Deploy:
+- Use windeployqt.exe to deploy this application on Windows
 
 ## Dependencies:
 - Qt6Core
