@@ -11,30 +11,28 @@ CONFIG += c++17
 SOURCES += \
     basiclocationdialog.cpp \
     currentwidget.cpp \
-    dailyforecast.cpp \
     dailywidget.cpp \
     editlocationdialog.cpp \
     expandingweatherwidget.cpp \
     hourlywidget.cpp \
     locationforecast.cpp \
     main.cpp \
-    mainforecast.cpp \
     mainwindow.cpp \
     newlocationdialog.cpp \
+    scrollareawrapper.cpp \
     weathertools.cpp
 
 HEADERS += \
     basiclocationdialog.h \
     currentwidget.h \
-    dailyforecast.h \
     dailywidget.h \
     editlocationdialog.h \
     expandingweatherwidget.h \
     hourlywidget.h \
     locationforecast.h \
-    mainforecast.h \
     mainwindow.h \
     newlocationdialog.h \
+    scrollareawrapper.h \
     weathertools.h
 
 # Default rules for deployment.

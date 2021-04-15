@@ -13,8 +13,10 @@ class ExpandingWeatherWidget : public QWidget
 {
     Q_OBJECT
     Q_PROPERTY(int hidden_height READ getHeight WRITE setHeight)
+    Q_PROPERTY(QColor color READ color WRITE setColor)
 public:
     ExpandingWeatherWidget(QWidget *parent = nullptr);
+
 protected:
     QLabel* generateBoldLabel(const QString &text);
     QLabel* generatePaleLabel();
@@ -29,9 +31,11 @@ private:
     QPropertyAnimation *animation;
     int getHeight();
     void setHeight(int value);
+    QColor color();
+    void setColor(QColor color);
 signals:
     void pressed(ExpandingWeatherWidget *widget);
-private slots:
+private slots:   void setTheme();
     void onAnimationFinished();
 };
 

@@ -15,9 +15,10 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
-#include <mainforecast.h>
-#include <dailyforecast.h>
-
+#include <scrollareawrapper.h>
+#include <currentwidget.h>
+#include <hourlywidget.h>
+#include <dailywidget.h>
 
 class LocationForecast : public QFrame
 {
@@ -43,8 +44,11 @@ private:
     QNetworkAccessManager *network_manager;
     QLabel* latitude;
     QLabel* longitude;
-    MainForecast *current_and_hourly;
-    DailyForecast *daily;
+
+    CurrentWidget *current_widget;
+    HourlyWidget *hourly_widgets[47];
+    DailyWidget *daily_widgets[8];
+
 private:
     void updateWeatherInfo(const QString &lat, const QString &lon);
 private slots:

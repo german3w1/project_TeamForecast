@@ -115,5 +115,4 @@ void DailyWidget::update_widget_info(const QVariantMap &new_dataset, const int &
 }
 
 DailyWidget::~DailyWidget(){
-
 }

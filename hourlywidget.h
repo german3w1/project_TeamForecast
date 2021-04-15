@@ -7,8 +7,9 @@
 
 class HourlyWidget : public ExpandingWeatherWidget
 {
+    Q_OBJECT
 public:
-    HourlyWidget(QWidget *parent);
+    HourlyWidget(QWidget *parent = nullptr);
     ~HourlyWidget();
     void update_widget_info(const QVariantMap &new_dataset, const int &today, const int &offset);
 private:

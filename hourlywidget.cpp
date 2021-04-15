@@ -81,6 +81,7 @@ void HourlyWidget::update_widget_info(const QVariantMap &new_dataset, const int 
 }
 
 
+
 HourlyWidget::~HourlyWidget(){
 
 }

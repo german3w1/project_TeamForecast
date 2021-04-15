@@ -50,14 +50,35 @@ void LocationForecast::init(const QString &lat, const QString &lon) {
     forecasts_frame->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     forecasts_layout = new QHBoxLayout(forecasts_frame);
     forecasts_frame->setLayout(forecasts_layout);
-    current_and_hourly = new MainForecast(this);
-    daily = new DailyForecast(this);
+
+    auto current_and_hourly = new ScrollAreaWrapper(this);
+    auto current_label = new QLabel("Текущая погода");
+    current_label->setStyleSheet("QLabel {font: bold 20px; color: black;}");
+    current_widget = new CurrentWidget;
+    auto hourly_label = new QLabel("Почасовой прогноз");
+    hourly_label->setStyleSheet("QLabel {font: bold 20px; color: black;}");
+    current_and_hourly->scroll_layout->addWidget(current_label, 0, Qt::Alignment(Qt::AlignHCenter));
+    current_and_hourly->scroll_layout->addWidget(current_widget);
+    current_and_hourly->scroll_layout->addWidget(hourly_label, 0, Qt::Alignment(Qt::AlignHCenter));
+    for (auto i = 0; i < 47; i++) {
+        hourly_widgets[i] = new HourlyWidget;
+        current_and_hourly->scroll_layout->addWidget(hourly_widgets[i]);
+    }
+
+    auto daily = new ScrollAreaWrapper(this);
+    auto daily_label = new QLabel("Прогноз на неделю");
+    daily_label->setStyleSheet("QLabel {font: bold 20px; color: black;}");
+    daily->scroll_layout->addWidget(daily_label, 0, Qt::Alignment(Qt::AlignHCenter));
+    for (auto i = 0; i < 10; i++) {
+        daily_widgets[i] = new DailyWidget;
+        daily->scroll_layout->addWidget(daily_widgets[i]);
+    }
+
     forecasts_layout->addWidget(current_and_hourly);
     forecasts_layout->addWidget(daily);
     main_layout->addWidget(forecasts_frame);
 
     previous_update_failed = false;
-
     network_manager = new QNetworkAccessManager(this);
     connect(network_manager, &QNetworkAccessManager::finished, this, &LocationForecast::onRequestProcessed);
     updateWeatherInfo(lat, lon);
@@ -86,13 +107,24 @@ void LocationForecast::updateWeatherInfo(const QString &lat, const QString &lon)
 }
 
 void LocationForecast::onRequestProcessed(QNetworkReply *reply){
-     if(!reply->error()){
-         qDebug() << "downloaded";
-         QJsonDocument json_answer =  QJsonDocument::fromJson(reply->readAll());
+    if(!reply->error()){
+        qDebug() << "downloaded";
+        QJsonDocument json_answer =  QJsonDocument::fromJson(reply->readAll());
          QVariantMap data_map = json_answer.toVariant().toMap();
          int offset = data_map["timezone_offset"].toInt();
-         current_and_hourly->update_weather_info(data_map["current"].toMap(), data_map["hourly"].toList(), offset);
-         daily->update_weather_info(data_map["daily"].toList(), offset);
+         QVariantMap current_dataset = data_map["current"].toMap();
+         int today = QDateTime::fromSecsSinceEpoch(current_dataset["dt"].toLongLong(), Qt::OffsetFromUTC, offset).date().day();
+         QVariantList hourly_dataset = data_map["hourly"].toList();
+         QVariantList daily_dataset = data_map["daily"].toList();
+
+         current_widget->update_widget_info(current_dataset, offset);
+         for (auto i = 0; i < 47; i++)
+             hourly_widgets[i]->update_widget_info(hourly_dataset[i + 1].toMap(), today, offset);
+         for (auto i = 0; i < 8; i++)
+             daily_widgets[i]->update_widget_info(daily_dataset[i].toMap(), offset);
+         latitude->setText(data_map["lat"].toString());
+         longitude->setText(data_map["lon"].toString());
+
          if (previous_update_failed) {
              control_panel_frame->setStyleSheet("QFrame {background: #FFAB40; border: 0px; border-radius: 12px; font: 16px;}"
                                                 "QLabel {color: white;}");
@@ -100,8 +132,6 @@ void LocationForecast::onRequestProcessed(QNetworkReply *reply){
                                        "QPushButton::pressed {background-color: #FF9800;}");
              previous_update_failed = false;
          }
-         latitude->setText(data_map["lat"].toString());
-         longitude->setText(data_map["lon"].toString());
          last_update_time_val->setText(QLocale::system().toString(QDateTime::currentDateTime()));
      }
      else if (!previous_update_failed) {

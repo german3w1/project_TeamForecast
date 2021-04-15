@@ -8,7 +8,7 @@
 class DailyWidget : public ExpandingWeatherWidget
 {
 public:
-    DailyWidget(QWidget *parent);
+    DailyWidget(QWidget *parent = nullptr);
     ~DailyWidget();
     void update_widget_info(const QVariantMap &new_dataset, const int &offset);
 private:
