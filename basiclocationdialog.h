@@ -8,21 +8,21 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <darkoverlayeffect.h>
 
 class BasicLocationDialog : public QDialog
 {
-public:
-    BasicLocationDialog(QWidget *parent);
+    Q_OBJECT
 protected:
+    BasicLocationDialog(QWidget *parent);
+    QLabel *title;
     QLineEdit* label_line;
     QLineEdit* latitude_line;
     QLineEdit* longitude_line;
     QPushButton* ok_btn;
 private:
     QDoubleValidator *latitude_validator;
-    QLabel* lat_error;
     QDoubleValidator *longitude_validator;
-    QLabel* lon_error;
 private slots:
     void onLabelChanged(const QString &text);
     void onLatitudeChanged();

@@ -9,9 +9,11 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    aboutdialog.cpp \
     basiclocationdialog.cpp \
     currentwidget.cpp \
     dailywidget.cpp \
+    darkoverlayeffect.cpp \
     editlocationdialog.cpp \
     expandingweatherwidget.cpp \
     hourlywidget.cpp \
@@ -23,9 +25,11 @@ SOURCES += \
     weathertools.cpp
 
 HEADERS += \
+    aboutdialog.h \
     basiclocationdialog.h \
     currentwidget.h \
     dailywidget.h \
+    darkoverlayeffect.h \
     editlocationdialog.h \
     expandingweatherwidget.h \
     hourlywidget.h \

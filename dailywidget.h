@@ -7,6 +7,7 @@
 
 class DailyWidget : public ExpandingWeatherWidget
 {
+    Q_OBJECT
 public:
     DailyWidget(QWidget *parent = nullptr);
     ~DailyWidget();

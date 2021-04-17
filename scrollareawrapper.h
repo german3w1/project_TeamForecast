@@ -7,12 +7,10 @@
 
 class ScrollAreaWrapper : public QScrollArea
 {
+    Q_OBJECT
 public:
     ScrollAreaWrapper(QWidget *parent);
     QVBoxLayout *scroll_layout;
-    void addWidget(QWidget *widget);
-private:
-
 };
 
 #endif // SCROLLAREAWRAPPER_H

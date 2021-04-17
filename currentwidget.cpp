@@ -70,3 +70,6 @@ void CurrentWidget::update_widget_info(const QVariantMap &new_dataset, const int
     m_wind_value->setText(QString::number(wind_speed) + "м/с, " + wind_direction);
 }
 
+CurrentWidget::~CurrentWidget() {
+
+}

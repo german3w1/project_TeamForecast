@@ -3,6 +3,16 @@
         <file alias="close">icons/close.png</file>
         <file alias="close_hover">icons/close_hover.png</file>
         <file alias="edit">icons/edit.png</file>
+        <file alias="app_close_dark">icons/app_close_dark.png</file>
+        <file alias="app_close_light">icons/app_close_light.png</file>
+        <file alias="add_light">icons/add_light.png</file>
+        <file alias="add_dark">icons/add_dark.png</file>
+        <file alias="ow_logo_dark">icons/ow_logo_dark.png</file>
+        <file alias="qt_logo">icons/qt_logo.png</file>
+        <file alias="app_minimize_light">icons/app_minimize_light.png</file>
+        <file alias="app_minimize_dark">icons/app_minimize_dark.png</file>
+        <file alias="app_switch_theme_dark">icons/app_switch_theme_dark.png</file>
+        <file alias="app_switch_theme_light">icons/app_switch_theme_light.png</file>
     </qresource>
     <qresource prefix="/weather_states">
         <file alias="scattered_clouds">icons/scattered_clouds.png</file>

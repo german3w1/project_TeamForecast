@@ -2,12 +2,14 @@
 
 NewLocationDialog::NewLocationDialog(QWidget* parent, QTabWidget* locations) : BasicLocationDialog(parent)
 {
-    setWindowTitle("Добавление новой локации");
+    parent->setGraphicsEffect(new DarkOverlayEffect);
+    title->setText("Добавление новой локации");
 
     ok_btn->setText("Добавить");
     ok_btn->hide();
 
     if(exec() == QDialog::Accepted) {
+        delete parent->graphicsEffect();
         auto label = label_line->text();
         auto lat = latitude_line->text();
         auto lon = longitude_line->text();
@@ -15,5 +17,8 @@ NewLocationDialog::NewLocationDialog(QWidget* parent, QTabWidget* locations) : B
         locations->addTab(new_location, label);
         locations->setCurrentIndex(locations->count() - 1);
         new_location->init(lat, lon);
+    }
+    else {
+        delete parent->graphicsEffect();
     }
 }

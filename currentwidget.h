@@ -6,8 +6,10 @@
 
 class CurrentWidget : public ExpandingWeatherWidget
 {
+    Q_OBJECT
 public:
     CurrentWidget(QWidget *parent  = nullptr);
+    ~CurrentWidget();
     void update_widget_info(const QVariantMap &new_dataset, const int &offset);
 private:
     QLabel *m_time;

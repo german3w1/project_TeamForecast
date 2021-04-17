@@ -2,7 +2,8 @@
 #define LOCATIONFORECAST_H
 
 #include <QDebug>
-
+#include <QParallelAnimationGroup>
+#include <QSequentialAnimationGroup>
 #include <QFrame>
 #include <QWidget>
 #include <QVBoxLayout>
@@ -26,16 +27,14 @@ class LocationForecast : public QFrame
 public:
     LocationForecast(QWidget* parent);
     void init(const QString &lat, const QString &lon);
-    QString getLat();
-    QString getLon();
     void setLat(const QString &lat);
     void setLon(const QString &lon);
+    QString getLat();
+    QString getLon();
+    void setDarkThemeEnabled(bool value);
 private:
     bool previous_update_failed;
-    QVBoxLayout *main_layout;
-    QHBoxLayout *forecasts_layout;
     QFrame *forecasts_frame;
-    QHBoxLayout *control_panel_layout;
     QFrame *control_panel_frame;
     QLabel *last_update_time;
     QLabel *last_update_time_val;
@@ -44,10 +43,9 @@ private:
     QNetworkAccessManager *network_manager;
     QLabel* latitude;
     QLabel* longitude;
-
     CurrentWidget *current_widget;
     HourlyWidget *hourly_widgets[47];
-    DailyWidget *daily_widgets[8];
+    DailyWidget *daily_widgets[7];
 
 private:
     void updateWeatherInfo(const QString &lat, const QString &lon);

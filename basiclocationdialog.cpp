@@ -1,16 +1,16 @@
 #include "basiclocationdialog.h"
-#include <QGraphicsDropShadowEffect>
 
-BasicLocationDialog::BasicLocationDialog(QWidget *parent) : QDialog(parent)
+BasicLocationDialog::BasicLocationDialog(QWidget *parent) : QDialog(parent, Qt::FramelessWindowHint)
 {
-    setContentsMargins(8, 4, 8, 0);
+    title = new QLabel;
+    title->setObjectName("title_label");
+
+    setContentsMargins(8, 0, 8, 0);
     setMinimumWidth(400);
-    setStyleSheet("QLabel {font: bold 12px; color: #757575; text-align: center;}"
-                  "QLineEdit {selection-background-color: #E0E0E0; selection-color: black; border: 0px; border-radius: 6px; }"
-                  "QPushButton::pressed {background-color: #E0E0E0}");
-    setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Minimum);
-    auto dialog_layout = new QVBoxLayout;
-    dialog_layout->setSpacing(1);
+    setMinimumHeight(250);
+    //setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Minimum);
+    auto dialog_layout = new QGridLayout;
+    dialog_layout->setSpacing(4);
     setLayout(dialog_layout);
 
     auto controls_frame = new QFrame;
@@ -21,14 +21,12 @@ BasicLocationDialog::BasicLocationDialog(QWidget *parent) : QDialog(parent)
 
     ok_btn = new QPushButton;
     ok_btn->setMinimumHeight(ok_btn->sizeHint().height() * 1.5);
-    ok_btn->setStyleSheet("QPushButton {font: bold 14px; color: #1E88E5; border: 0px; border-radius: 12px;}");
-    ok_btn->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
+    //ok_btn->setStyleSheet("QPushButton { color: #1E88E5 }");
     connect(ok_btn, &QPushButton::clicked, this, &QDialog::accept);
 
     auto cancel_btn = new QPushButton("Отмена");
     cancel_btn->setMinimumHeight(cancel_btn->sizeHint().height() * 1.5);
-    cancel_btn->setStyleSheet("QPushButton {font: bold 14px; color: #DD2C00; border: 0px; border-radius: 12px;}");
-    cancel_btn->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
+    //cancel_btn->setStyleSheet("QPushButton {color: red; }");
     connect(cancel_btn, &QPushButton::clicked, this, &QDialog::reject);
 
     controls_layout->addWidget(ok_btn);
@@ -49,27 +47,15 @@ BasicLocationDialog::BasicLocationDialog(QWidget *parent) : QDialog(parent)
     longitude_line->setValidator(longitude_validator);
     connect(longitude_line, &QLineEdit::textEdited, this, &BasicLocationDialog::onLongitudeChanged);
 
-    lat_error = new QLabel("Неверный ввод");
-    auto error_size_policy = QSizePolicy(lat_error->sizePolicy());
-    error_size_policy.setRetainSizeWhenHidden(true);
-    lat_error->setSizePolicy(error_size_policy);
-    lat_error->setStyleSheet("QLabel {font: 12px; color: #DD2C00;}");
-    lat_error->hide();
 
-    lon_error = new QLabel("Неверный ввод");
-    lon_error->setSizePolicy(error_size_policy);
-    lon_error->setStyleSheet("QLabel {font: 12px; color: #DD2C00;}");
-    lon_error->hide();
-
-    dialog_layout->addWidget(new QLabel("Название локации"));
-    dialog_layout->addWidget(label_line);
-    dialog_layout->addWidget(new QLabel("Широта"));
-    dialog_layout->addWidget(latitude_line);
-    dialog_layout->addWidget(lat_error);
-    dialog_layout->addWidget(new QLabel("Долгота"));
-    dialog_layout->addWidget(longitude_line);
-    dialog_layout->addWidget(lon_error);
-    dialog_layout->addWidget(controls_frame);
+    dialog_layout->addWidget(title, 0, 0, 2, 5);
+    dialog_layout->addWidget(new QLabel("Название"), 2, 0, 2, 1);
+    dialog_layout->addWidget(label_line, 2, 1, 2, 1);
+    dialog_layout->addWidget(new QLabel("Широта"), 4, 0, 2, 1);
+    dialog_layout->addWidget(latitude_line, 4, 1, 2, 1);
+    dialog_layout->addWidget(new QLabel("Долгота"), 6, 0, 2, 1);
+    dialog_layout->addWidget(longitude_line, 6, 1, 2, 1);
+    dialog_layout->addWidget(controls_frame, 8, 0, 1, 2);
 
 }
 
@@ -77,14 +63,18 @@ void BasicLocationDialog::onLabelChanged(const QString &text){
     if (text.size() == 0) {
         label_line->setModified(false);
         ok_btn->hide();
+        label_line->setStyleSheet("");
     }
-    else if (latitude_line->hasAcceptableInput() && longitude_line->hasAcceptableInput())
-        ok_btn->show();
+    else {
+        if (latitude_line->hasAcceptableInput() && longitude_line->hasAcceptableInput())
+            ok_btn->show();
+        label_line->setStyleSheet("border-bottom: 2px solid #00E676;");
+    }
 }
 
 void BasicLocationDialog::onLatitudeChanged(){
     if (latitude_line->hasAcceptableInput()){
-        lat_error->hide();
+        latitude_line->setStyleSheet("border-bottom: 2px solid #00E676;");
         if (longitude_line->hasAcceptableInput()) {
             if (!label_line->isModified())
                 label_line->setText(latitude_line->text() + ", " + longitude_line->text());
@@ -92,8 +82,8 @@ void BasicLocationDialog::onLatitudeChanged(){
         }
     }
     else {
-        if (latitude_line->text().size() != 0) lat_error->show();
-        else lat_error->hide();
+        if (latitude_line->text().size() != 0) latitude_line->setStyleSheet("border-bottom: 2px solid red;");
+        else latitude_line->setStyleSheet("");
         if (!label_line->isModified())  label_line->setText("");
         ok_btn->hide();
     }
@@ -101,7 +91,7 @@ void BasicLocationDialog::onLatitudeChanged(){
 
 void BasicLocationDialog::onLongitudeChanged(){
     if (longitude_line->hasAcceptableInput()){
-        lon_error->hide();
+        longitude_line->setStyleSheet("border-bottom: 2px solid #00E676; ");
         if (latitude_line->hasAcceptableInput()) {
             if (!label_line->isModified())
                 label_line->setText(latitude_line->text() + ", " + longitude_line->text());
@@ -109,8 +99,8 @@ void BasicLocationDialog::onLongitudeChanged(){
         }
     }
     else {
-        if (longitude_line->text().size() != 0) lon_error->show();
-        else lon_error->hide();
+        if (longitude_line->text().size() != 0) longitude_line->setStyleSheet("border-bottom: 2px solid red;");
+        else longitude_line->setStyleSheet("");
         if (!label_line->isModified()) label_line->setText("");
         ok_btn->hide();
     }
