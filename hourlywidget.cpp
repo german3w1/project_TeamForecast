@@ -50,7 +50,8 @@ HourlyWidget::HourlyWidget(QWidget *parent) : ExpandingWeatherWidget(parent)
     hidden_layout->addWidget(m_uv_ix_value, 3, 3);
 }
 
-void HourlyWidget::update_widget_info(const QVariantMap &new_dataset, const int &today, const int &offset) {
+void HourlyWidget::update_widget_info(const QVariantMap &new_dataset, const int &today, const int &offset)
+{
     QDateTime date_time = QDateTime::fromSecsSinceEpoch(new_dataset["dt"].toLongLong(), Qt::OffsetFromUTC, offset);
     m_time->setText(date_time.time().toString("hh:mm"));
     if (int diff = date_time.date().day() - today; diff == 0)
@@ -82,6 +83,7 @@ void HourlyWidget::update_widget_info(const QVariantMap &new_dataset, const int 
 
 
 
-HourlyWidget::~HourlyWidget(){
+HourlyWidget::~HourlyWidget()
+{
 
 }

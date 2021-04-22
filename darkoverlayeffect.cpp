@@ -5,7 +5,8 @@ DarkOverlayEffect::DarkOverlayEffect()
 
 }
 
-void DarkOverlayEffect::draw( QPainter* painter ) {
+void DarkOverlayEffect::draw( QPainter* painter )
+{
     QPixmap pixmap;
     QPoint offset;
     if(sourceIsPixmap()) // No point in drawing in device coordinates (pixmap will be scaled anyways)

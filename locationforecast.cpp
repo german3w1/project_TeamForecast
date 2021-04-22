@@ -1,7 +1,7 @@
 #include "locationforecast.h"
 #include <editlocationdialog.h>
 
-LocationForecast::LocationForecast(QWidget* parent) : QFrame(parent)
+LocationForecast::LocationForecast(const QString &lat, const QString &lon, QWidget* parent) : QFrame(parent)
 {
     setContentsMargins(0,0,0,0);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -20,6 +20,9 @@ LocationForecast::LocationForecast(QWidget* parent) : QFrame(parent)
     edit->setIconSize(QSize(18, 18));
     edit->setMaximumSize(30, 30);
     connect(edit, &QPushButton::clicked, this, &LocationForecast::onEditBtnClicked);
+    favorite_checkbox = new QRadioButton;
+    favorite_checkbox->setObjectName("favorite_checkbox");
+    favorite_checkbox->setChecked(false);
     latitude = new QLabel;
     latitude->setObjectName("val_label");
     longitude = new QLabel;
@@ -30,9 +33,10 @@ LocationForecast::LocationForecast(QWidget* parent) : QFrame(parent)
     last_update_time_val->setObjectName("val_label");
     update_btn = new QPushButton("Обновить", control_panel_frame);
     update_btn->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-    connect(update_btn, &QPushButton::clicked, this, &LocationForecast::onUpdateBtnClicked);
+    connect(update_btn, &QPushButton::clicked, this, &LocationForecast::weatherUpdateRequested);
 
     control_panel_layout->addWidget(edit, 1);
+    control_panel_layout->addWidget(favorite_checkbox, 1, Qt::AlignCenter);
     control_panel_layout->addWidget(latitude, 1, Qt::AlignCenter);
     control_panel_layout->addWidget(longitude, 1, Qt::AlignCenter);
     control_panel_layout->addWidget(last_update_time, 3, Qt::AlignRight);
@@ -77,25 +81,22 @@ LocationForecast::LocationForecast(QWidget* parent) : QFrame(parent)
     previous_update_failed = false;
     network_manager = new QNetworkAccessManager(this);
     connect(network_manager, &QNetworkAccessManager::finished, this, &LocationForecast::onRequestProcessed);
-}
 
-void LocationForecast::init(const QString &lat, const QString &lon) {
     latitude->setText(lat);
     longitude->setText(lon);
-    updateWeatherInfo(lat, lon);
+    dumpObjectTree();
+    //updateWeatherInfo(lat, lon);
 }
 
-void LocationForecast::onUpdateBtnClicked(){
-    updateWeatherInfo(latitude->text(), longitude->text());
-}
-
-void LocationForecast::onEditBtnClicked(){
+void LocationForecast::onEditBtnClicked()
+{
     bool need_update = false;
     EditLocationDialog(parentWidget()->parentWidget(), qobject_cast<QTabWidget*>(parentWidget()->parentWidget()), need_update);
     if (need_update) updateWeatherInfo(latitude->text(), longitude->text());
 }
 
-void LocationForecast::updateWeatherInfo(const QString &lat, const QString &lon){
+void LocationForecast::updateWeatherInfo(const QString &lat, const QString &lon)
+{
     update_btn->setEnabled(false);
     update_btn->setText("Обновление");
 
@@ -105,9 +106,9 @@ void LocationForecast::updateWeatherInfo(const QString &lat, const QString &lon)
     network_manager->get(QNetworkRequest(QUrl(url)));
 }
 
-void LocationForecast::onRequestProcessed(QNetworkReply *reply){
+void LocationForecast::onRequestProcessed(QNetworkReply *reply)
+{
     if(!reply->error()){
-        qDebug() << "downloaded";
         QJsonDocument json_answer =  QJsonDocument::fromJson(reply->readAll());
          QVariantMap data_map = json_answer.toVariant().toMap();
          int offset = data_map["timezone_offset"].toInt();
@@ -134,43 +135,38 @@ void LocationForecast::onRequestProcessed(QNetworkReply *reply){
      update_btn->setText("Обновить");
 }
 
-QString LocationForecast::getLat(){
+QString LocationForecast::getLat()
+{
     return latitude->text();
 }
 
-QString LocationForecast::getLon(){
+QString LocationForecast::getLon()
+{
     return longitude->text();
 }
 
-void LocationForecast::setDarkThemeEnabled(bool value)
+
+void LocationForecast::setLat(const QString &lat)
 {
-    if (value) {
-        setStyleSheet("QWidget { color: white; background-color: rgb(1, 87, 155); border-radius: 12px}"
-                      "LocationForecast { background: rgb(55, 71, 79); border-radius: 0px }"
-                      "QPushButton {font: bold 14 px }"
-                      "QPushButton::hover {background: rgb(1, 75,133) }");
-
-        forecasts_frame->setStyleSheet(".QFrame {background: rgb(55, 71, 79) }"
-                                       "QFrame > QLabel {background: rgb(55, 71, 79); font: bold 20px;}");
-
-    } else {
-        setStyleSheet("QWidget { color: white; background: rgb(255, 171, 64); border-radius: 12px }"
-                      "LocationForecast { background: white; border-radius: 0px }"
-                      "QPushButton {font: bold 14px }"
-                      "QPushButton::hover {background-color: rgb(255, 152, 0) }");
-
-
-        forecasts_frame->setStyleSheet(".QFrame {background: white }"
-                                       "QFrame > QLabel {background: white; font: bold 20px ; color: black}");
-    }
-}
-
-void LocationForecast::setLat(const QString &lat) {
     latitude->setText(lat);
 }
 
-void LocationForecast::setLon(const QString &lon) {
+void LocationForecast::setLon(const QString &lon)
+{
     longitude->setText(lon);
 }
 
+bool LocationForecast::isFavorite() {
+    return favorite_checkbox->isChecked();
+}
+
+void LocationForecast::setFavorite(bool value)
+{
+    favorite_checkbox->setChecked(value);
+}
+
+void LocationForecast::weatherUpdateRequested()
+{
+    updateWeatherInfo(latitude->text(), longitude->text());
+}
 

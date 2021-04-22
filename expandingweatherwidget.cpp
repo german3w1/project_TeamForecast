@@ -26,21 +26,25 @@ ExpandingWeatherWidget::ExpandingWeatherWidget(QWidget *parent) : QWidget(parent
     animation->setDuration(200);
 }
 
-int ExpandingWeatherWidget::getHeight() {
+int ExpandingWeatherWidget::getHeight()
+{
     return hidden_frame->height();
 }
 
-void ExpandingWeatherWidget::setHeight(int value) {
+void ExpandingWeatherWidget::setHeight(int value)
+{
     hidden_frame->setFixedHeight(value);
 }
 
-QLabel* ExpandingWeatherWidget::generateBoldLabel(const QString &text){
+QLabel* ExpandingWeatherWidget::generateBoldLabel(const QString &text)
+{
     auto label = new QLabel(text);
     label->setStyleSheet("QLabel {font: bold 14px; }");
     return label;
 }
 
-QLabel* ExpandingWeatherWidget::generatePaleLabel(){
+QLabel* ExpandingWeatherWidget::generatePaleLabel()
+{
     auto label = new QLabel;
     label->setStyleSheet("QLabel {font: 14px }");
     return label;
@@ -74,6 +78,7 @@ void ExpandingWeatherWidget::mousePressEvent(QMouseEvent *event)
    //emit pressed(this);
 }
 
-ExpandingWeatherWidget::~ExpandingWeatherWidget(){
+ExpandingWeatherWidget::~ExpandingWeatherWidget()
+{
 
 }

@@ -2,8 +2,6 @@
 #define LOCATIONFORECAST_H
 
 #include <QDebug>
-#include <QParallelAnimationGroup>
-#include <QSequentialAnimationGroup>
 #include <QFrame>
 #include <QWidget>
 #include <QVBoxLayout>
@@ -16,6 +14,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QRadioButton>
 #include <scrollareawrapper.h>
 #include <currentwidget.h>
 #include <hourlywidget.h>
@@ -25,17 +24,19 @@ class LocationForecast : public QFrame
 {
     Q_OBJECT
 public:
-    LocationForecast(QWidget* parent);
-    void init(const QString &lat, const QString &lon);
+    LocationForecast(const QString &lat, const QString &lon, QWidget* parent = 0);
     void setLat(const QString &lat);
     void setLon(const QString &lon);
     QString getLat();
     QString getLon();
-    void setDarkThemeEnabled(bool value);
+    bool isFavorite();
+    void setFavorite(bool value);
+    void updateWeatherInfo();
 private:
     bool previous_update_failed;
     QFrame *forecasts_frame;
     QFrame *control_panel_frame;
+    QRadioButton *favorite_checkbox;
     QLabel *last_update_time;
     QLabel *last_update_time_val;
     QLabel *update_err_msg;
@@ -46,12 +47,11 @@ private:
     CurrentWidget *current_widget;
     HourlyWidget *hourly_widgets[47];
     DailyWidget *daily_widgets[7];
-
-private:
     void updateWeatherInfo(const QString &lat, const QString &lon);
+public slots:
+    void weatherUpdateRequested();
 private slots:
     void onRequestProcessed(QNetworkReply *reply);
-    void onUpdateBtnClicked();
     void onEditBtnClicked();
 };
 

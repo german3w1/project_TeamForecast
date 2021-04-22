@@ -12,6 +12,7 @@ class AboutDialog : public QDialog
     Q_OBJECT
 public:
     AboutDialog(QWidget *parent);
+    ~AboutDialog();
 };
 
 #endif // ABOUTDIALOG_H

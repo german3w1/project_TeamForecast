@@ -1,4 +1,5 @@
 #include "aboutdialog.h"
+#include <QDebug>
 
 AboutDialog::AboutDialog(QWidget *parent) : QDialog(parent, Qt::FramelessWindowHint)
 {
@@ -23,11 +24,11 @@ AboutDialog::AboutDialog(QWidget *parent) : QDialog(parent, Qt::FramelessWindowH
     logo_layout->addWidget(ow_logo);
     logo_layout->addWidget(qt_logo);
 
-    auto version = new QLabel("v1.7.0");
+    auto version = new QLabel("v1.8.0");
     version->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     auto author = new QLabel("German Petrin, 2021");
     author->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    auto about = new QLabel("Бесплатный удобный погодный клиент с возможностью\nполучения прогноза погоды по координатам");
+    auto about = new QLabel("Бесплатный погодный клиент с возможностью\nполучения прогноза погоды по координатам");
 
     auto details = new QLabel;
     details->setText("<a href=\"https://github.com/german3w1/project_TeamForecast\" style=\"color: black;\" >Подробнее на Github</a>");
@@ -36,8 +37,6 @@ AboutDialog::AboutDialog(QWidget *parent) : QDialog(parent, Qt::FramelessWindowH
     details->setOpenExternalLinks(true);
 
     auto cancel_btn = new QPushButton("Закрыть");
-    cancel_btn->setMinimumHeight(cancel_btn->sizeHint().height() * 1.4);
-
     cancel_btn->setMinimumHeight(cancel_btn->sizeHint().height() * 1.5);
     cancel_btn->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
     connect(cancel_btn, &QPushButton::clicked, this, &QDialog::reject);
@@ -50,7 +49,8 @@ AboutDialog::AboutDialog(QWidget *parent) : QDialog(parent, Qt::FramelessWindowH
     main_layout->addWidget(details);
     main_layout->addWidget(cancel_btn);
 
-    parent->dumpObjectTree();
-
     exec();
+}
+
+AboutDialog::~AboutDialog() {
 }

@@ -43,20 +43,20 @@ DailyWidget::DailyWidget(QWidget *parent) : ExpandingWeatherWidget(parent)
     m_night_fl_value = generatePaleLabel();
 
     hidden_layout->addWidget(new QLabel, 0, 0, 1, 6);
-    hidden_layout->addWidget(generateBoldLabel("Влажность"), 1, 0);
-    hidden_layout->addWidget(m_humidity_value, 1, 1);
-    hidden_layout->addWidget(generateBoldLabel("Облачность"), 1, 2);
-    hidden_layout->addWidget(m_clouds_value, 1, 3);
+    hidden_layout->addWidget(generateBoldLabel("Давление"), 1, 0, 1, 1 );
+    hidden_layout->addWidget(m_pressure_value, 1, 2, 1, 2);
+    hidden_layout->addWidget(generateBoldLabel("Ветер"), 1, 3, 1, 1, Qt::Alignment(Qt::AlignRight));
+    hidden_layout->addWidget(m_wind_value, 1, 4, 1, 2);
+    hidden_layout->addWidget(generateBoldLabel("Влажность"), 3, 0);
+    hidden_layout->addWidget(m_humidity_value, 3, 1);
+    hidden_layout->addWidget(generateBoldLabel("Облачность"), 3, 2);
+    hidden_layout->addWidget(m_clouds_value, 3, 3);
     hidden_layout->addWidget(generateBoldLabel("УФ-индекс"), 2, 2);
     hidden_layout->addWidget(m_uv_ix_value, 2, 3);
     hidden_layout->addWidget(generateBoldLabel("Видимость"), 2, 0);
     hidden_layout->addWidget(m_visibility_value, 2, 1);
     hidden_layout->addWidget(generateBoldLabel("Точка росы"), 2, 4);
     hidden_layout->addWidget(m_dew_point_value, 2, 5);
-    hidden_layout->addWidget(generateBoldLabel("Давление"), 3, 0, 1, 1 );
-    hidden_layout->addWidget(m_pressure_value, 3, 2, 1, 2);
-    hidden_layout->addWidget(generateBoldLabel("Ветер"), 3, 3, 1, 1, Qt::Alignment(Qt::AlignRight));
-    hidden_layout->addWidget(m_wind_value, 3, 4, 1, 2);
     hidden_layout->addWidget(new QLabel, 4, 0, 1, 6);
     hidden_layout->addWidget(generateBoldLabel("Утром"), 5, 0, 1, 1);
     hidden_layout->addWidget(m_morn_temp_value, 5, 1, 1, 1, Qt::Alignment(Qt::AlignRight));
@@ -76,7 +76,8 @@ DailyWidget::DailyWidget(QWidget *parent) : ExpandingWeatherWidget(parent)
     hidden_layout->addWidget(m_night_fl_value, 8, 3, 1, 1, Qt::Alignment(Qt::AlignRight));
 }
 
-void DailyWidget::update_widget_info(const QVariantMap &new_dataset, const int &offset) {
+void DailyWidget::update_widget_info(const QVariantMap &new_dataset, const int &offset)
+{
    QVariantMap new_dataset_temp = new_dataset["temp"].toMap();
    QVariantMap new_dataset_fl = new_dataset["feels_like"].toMap();
    QDate date = QDateTime::fromSecsSinceEpoch(new_dataset["dt"].toLongLong(), Qt::OffsetFromUTC, offset).date();
@@ -114,5 +115,6 @@ void DailyWidget::update_widget_info(const QVariantMap &new_dataset, const int &
 
 }
 
-DailyWidget::~DailyWidget(){
+DailyWidget::~DailyWidget()
+{
 }

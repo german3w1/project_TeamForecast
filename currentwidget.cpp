@@ -47,7 +47,8 @@ CurrentWidget::CurrentWidget(QWidget *parent) : ExpandingWeatherWidget(parent)
     hidden_layout->addWidget(m_uv_ix_value, 3, 3);
 }
 
-void CurrentWidget::update_widget_info(const QVariantMap &new_dataset, const int &offset) {
+void CurrentWidget::update_widget_info(const QVariantMap &new_dataset, const int &offset)
+{
     QTime time = QDateTime::fromSecsSinceEpoch(new_dataset["dt"].toLongLong(), Qt::OffsetFromUTC, offset).time();
     m_time->setText(time.toString("hh:mm"));
 
@@ -70,6 +71,7 @@ void CurrentWidget::update_widget_info(const QVariantMap &new_dataset, const int
     m_wind_value->setText(QString::number(wind_speed) + "м/с, " + wind_direction);
 }
 
-CurrentWidget::~CurrentWidget() {
+CurrentWidget::~CurrentWidget()
+{
 
 }

@@ -39,13 +39,13 @@ BasicLocationDialog::BasicLocationDialog(QWidget *parent) : QDialog(parent, Qt::
     latitude_validator = new QDoubleValidator(-90,90,6,latitude_line);
     latitude_validator->setLocale(QLocale::C);
     latitude_line->setValidator(latitude_validator);
-    connect(latitude_line, &QLineEdit::textEdited, this, &BasicLocationDialog::onLatitudeChanged);
+    connect(latitude_line, &QLineEdit::textChanged, this, &BasicLocationDialog::onLatitudeChanged);
 
     longitude_line = new QLineEdit; //поле ввода долготы
     longitude_validator = new QDoubleValidator(-180,180,6,longitude_line);
     longitude_validator->setLocale(QLocale::C);
     longitude_line->setValidator(longitude_validator);
-    connect(longitude_line, &QLineEdit::textEdited, this, &BasicLocationDialog::onLongitudeChanged);
+    connect(longitude_line, &QLineEdit::textChanged, this, &BasicLocationDialog::onLongitudeChanged);
 
 
     dialog_layout->addWidget(title, 0, 0, 2, 5);
@@ -59,7 +59,8 @@ BasicLocationDialog::BasicLocationDialog(QWidget *parent) : QDialog(parent, Qt::
 
 }
 
-void BasicLocationDialog::onLabelChanged(const QString &text){
+void BasicLocationDialog::onLabelChanged(const QString &text)
+{
     if (text.size() == 0) {
         label_line->setModified(false);
         ok_btn->hide();
@@ -72,7 +73,8 @@ void BasicLocationDialog::onLabelChanged(const QString &text){
     }
 }
 
-void BasicLocationDialog::onLatitudeChanged(){
+void BasicLocationDialog::onLatitudeChanged()
+{
     if (latitude_line->hasAcceptableInput()){
         latitude_line->setStyleSheet("border-bottom: 2px solid #00E676;");
         if (longitude_line->hasAcceptableInput()) {
@@ -89,7 +91,8 @@ void BasicLocationDialog::onLatitudeChanged(){
     }
 };
 
-void BasicLocationDialog::onLongitudeChanged(){
+void BasicLocationDialog::onLongitudeChanged()
+{
     if (longitude_line->hasAcceptableInput()){
         longitude_line->setStyleSheet("border-bottom: 2px solid #00E676; ");
         if (latitude_line->hasAcceptableInput()) {

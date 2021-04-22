@@ -22,6 +22,7 @@ SOURCES += \
     mainwindow.cpp \
     newlocationdialog.cpp \
     scrollareawrapper.cpp \
+    settingsdialog.cpp \
     weathertools.cpp
 
 HEADERS += \
@@ -37,6 +38,7 @@ HEADERS += \
     mainwindow.h \
     newlocationdialog.h \
     scrollareawrapper.h \
+    settingsdialog.h \
     weathertools.h
 
 # Default rules for deployment.
