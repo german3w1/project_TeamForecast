@@ -1,0 +1,9 @@
+<map id="LocationForecast" name="LocationForecast">
+<area shape="rect" id="node1" title="Widget implementing user location." alt="" coords="147,247,269,273"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,157,75,184"/>
+<area shape="rect" id="node3" href="$class_hourly_widget.html" title="Hourly weather forecast widget." alt="" coords="99,157,199,184"/>
+<area shape="rect" id="node4" href="$class_expanding_weather_widget.html" title="Base widget for Current&#45;, Hourly&#45; and Daily&#45; weather forecast widgets." alt="" coords="183,81,356,108"/>
+<area shape="rect" id="node6" href="$class_daily_widget.html" title="Daily weather forecast widget." alt="" coords="223,157,315,184"/>
+<area shape="rect" id="node7" href="$class_current_widget.html" title="Current weather forecast widget." alt="" coords="339,157,445,184"/>
+<area shape="rect" id="node5" title=" " alt="" coords="233,5,306,32"/>
+</map>

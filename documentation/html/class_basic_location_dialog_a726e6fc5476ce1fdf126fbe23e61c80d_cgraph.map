@@ -1,0 +1,6 @@
+<map id="BasicLocationDialog::BasicLocationDialog" name="BasicLocationDialog::BasicLocationDialog">
+<area shape="rect" id="node1" title="Constructs BasicLocaitonDialog." alt="" coords="5,71,153,112"/>
+<area shape="rect" id="node2" href="$class_basic_location_dialog.html#aff5155c63a3c8a966d0a1d5702cca7df" title="Called when user typed/edited location label or when it was automatically filled with latitude and lo..." alt="" coords="207,5,347,47"/>
+<area shape="rect" id="node3" href="$class_basic_location_dialog.html#abf6890c68f97469339ad22530545d0a4" title="Called when user typed/edited location latitude." alt="" coords="206,71,347,112"/>
+<area shape="rect" id="node4" href="$class_basic_location_dialog.html#aa5be441feb51fba398f88a56da83fef8" title="Called when user typed/edited location longitude." alt="" coords="201,136,352,177"/>
+</map>

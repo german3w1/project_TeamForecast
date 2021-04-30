@@ -1,0 +1,8 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" title=" " alt="" coords="5,56,73,83"/>
+<area shape="rect" id="node2" href="$class_about_dialog.html" title="App about modal dialog." alt="" coords="145,5,237,32"/>
+<area shape="rect" id="node3" href="$class_basic_location_dialog.html" title="Basic modal dialog for add/edit location dialogs." alt="" coords="121,56,261,83"/>
+<area shape="rect" id="node6" href="$class_settings_dialog.html" title="App settings modal dialog." alt="" coords="138,107,245,133"/>
+<area shape="rect" id="node4" href="$class_edit_location_dialog.html" title="Modal dialog used for editing data of the location widget from which it was called." alt="" coords="310,31,441,57"/>
+<area shape="rect" id="node5" href="$class_new_location_dialog.html" title="Modal dialog used for creating new user locations." alt="" coords="309,81,441,108"/>
+</map>

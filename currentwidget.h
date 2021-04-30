@@ -4,30 +4,34 @@
 #include <QJsonObject>
 #include <expandingweatherwidget.h>
 
+/**
+@brief Current weather forecast widget
+*/
+
 class CurrentWidget : public ExpandingWeatherWidget
 {
     Q_OBJECT
 public:
     CurrentWidget(QWidget *parent  = nullptr);
     ~CurrentWidget();
-    void update_widget_info(const QVariantMap &new_dataset, const int &offset);
+    void updateWidgetInfo(const QVariantMap &new_dataset, const int &offset);
 private:
-    QLabel *m_time;
-    QLabel *m_icon;
-   // QLabel *m_sunrise;
-   // QLabel *m_sunset;
-    QLabel *m_temp;
-    QLabel *m_temp_value;
-    QLabel *m_feels_like;
-    QLabel *m_feels_like_value;
+    QLabel *time; ///< current time field
+    QLabel *icon; ///< icon of current weather
+   // QLabel *sunrise;
+   // QLabel *sunset;
+    QLabel *temp; ///< current temp label
+    QLabel *temp_value; ///< current temp value field
+    QLabel *feels_like; ///< current feels like label
+    QLabel *feels_like_value; ///< current feels like value field
 
-    QLabel *m_pressure_value;
-    QLabel *m_humidity_value;
-    QLabel *m_dew_point_value;
-    QLabel *m_uv_ix_value;
-    QLabel *m_clouds_value;
-    QLabel *m_visibility_value;
-    QLabel *m_wind_value;
+    QLabel *pressure_value; ///< current pressure value field
+    QLabel *humidity_value; ///< current humidity value field
+    QLabel *dew_point_value; ///< current dew-point value field
+    QLabel *uv_ix_value; ///< current UV-index value field
+    QLabel *clouds_value; ///< current cloudness value field
+    QLabel *visibility_value; ///< current visibility value field
+    QLabel *wind_value; ///< current wind speed and direction values field
 };
 
 #endif // CURRENTWIDGET_H

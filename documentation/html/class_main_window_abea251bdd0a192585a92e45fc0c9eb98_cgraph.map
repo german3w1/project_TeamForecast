@@ -1,0 +1,5 @@
+<map id="MainWindow::changeThemeRequest" name="MainWindow::changeThemeRequest">
+<area shape="rect" id="node1" title="Сhanges the theme to the opposite." alt="" coords="5,31,239,57"/>
+<area shape="rect" id="node2" href="$class_main_window.html#acc57d86037d0e7babbd0370c07092ab9" title="Set app theme to dark." alt="" coords="287,5,475,32"/>
+<area shape="rect" id="node3" href="$class_main_window.html#a7514fb0570dc8047fa134342053b6124" title="Set app theme to light." alt="" coords="287,56,476,83"/>
+</map>

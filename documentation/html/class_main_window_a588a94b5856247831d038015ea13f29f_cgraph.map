@@ -1,0 +1,6 @@
+<map id="MainWindow::restoreAll" name="MainWindow::restoreAll">
+<area shape="rect" id="node1" title="Restore all saved app data." alt="" coords="5,56,164,83"/>
+<area shape="rect" id="node2" href="$class_main_window.html#adea8b8ce2e22afb8a9dc25e641d98cee" title="Restore all saved locations." alt="" coords="212,5,412,32"/>
+<area shape="rect" id="node3" href="$class_main_window.html#acc57d86037d0e7babbd0370c07092ab9" title="Set app theme to dark." alt="" coords="218,56,406,83"/>
+<area shape="rect" id="node4" href="$class_main_window.html#a7514fb0570dc8047fa134342053b6124" title="Set app theme to light." alt="" coords="217,107,407,133"/>
+</map>

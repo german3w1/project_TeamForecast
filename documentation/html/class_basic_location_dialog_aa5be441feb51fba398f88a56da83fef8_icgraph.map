@@ -1,0 +1,4 @@
+<map id="BasicLocationDialog::onLongitudeChanged" name="BasicLocationDialog::onLongitudeChanged">
+<area shape="rect" id="node1" title="Called when user typed/edited location longitude." alt="" coords="201,5,352,47"/>
+<area shape="rect" id="node2" href="$class_basic_location_dialog.html#a726e6fc5476ce1fdf126fbe23e61c80d" title="Constructs BasicLocaitonDialog." alt="" coords="5,5,153,47"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="ExpandingWeatherWidget" name="ExpandingWeatherWidget">
+<area shape="rect" id="node1" title="Base widget for Current&#45;, Hourly&#45; and Daily&#45; weather forecast widgets." alt="" coords="94,80,267,107"/>
+<area shape="rect" id="node3" href="$class_current_widget.html" title="Current weather forecast widget." alt="" coords="5,155,111,181"/>
+<area shape="rect" id="node4" href="$class_daily_widget.html" title="Daily weather forecast widget." alt="" coords="135,155,227,181"/>
+<area shape="rect" id="node5" href="$class_hourly_widget.html" title="Hourly weather forecast widget." alt="" coords="251,155,351,181"/>
+<area shape="rect" id="node2" title=" " alt="" coords="144,5,217,32"/>
+</map>

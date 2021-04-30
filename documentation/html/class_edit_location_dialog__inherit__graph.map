@@ -1,0 +1,5 @@
+<map id="EditLocationDialog" name="EditLocationDialog">
+<area shape="rect" id="node1" title="Modal dialog used for editing data of the location widget from which it was called." alt="" coords="10,155,141,181"/>
+<area shape="rect" id="node2" href="$class_basic_location_dialog.html" title="Basic modal dialog for add/edit location dialogs." alt="" coords="5,80,145,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="41,5,109,32"/>
+</map>

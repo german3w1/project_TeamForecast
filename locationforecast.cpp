@@ -84,7 +84,6 @@ LocationForecast::LocationForecast(const QString &lat, const QString &lon, QWidg
 
     latitude->setText(lat);
     longitude->setText(lon);
-    dumpObjectTree();
     //updateWeatherInfo(lat, lon);
 }
 
@@ -117,11 +116,11 @@ void LocationForecast::onRequestProcessed(QNetworkReply *reply)
          QVariantList hourly_dataset = data_map["hourly"].toList();
          QVariantList daily_dataset = data_map["daily"].toList();
 
-         current_widget->update_widget_info(current_dataset, offset);
+         current_widget->updateWidgetInfo(current_dataset, offset);
          for (auto i = 0; i < 47; i++)
-             hourly_widgets[i]->update_widget_info(hourly_dataset[i + 1].toMap(), today, offset);
+             hourly_widgets[i]->updateWidgetInfo(hourly_dataset[i + 1].toMap(), today, offset);
          for (auto i = 0; i < 7; i++)
-             daily_widgets[i]->update_widget_info(daily_dataset[i + 1].toMap(), offset);
+             daily_widgets[i]->updateWidgetInfo(daily_dataset[i + 1].toMap(), offset);
          latitude->setText(data_map["lat"].toString());
          longitude->setText(data_map["lon"].toString());
 

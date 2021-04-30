@@ -1,0 +1,13 @@
+<map id="MainWindow::MainWindow" name="MainWindow::MainWindow">
+<area shape="rect" id="node1" title=" " alt="" coords="5,165,184,192"/>
+<area shape="rect" id="node2" href="$class_main_window.html#a73907e1002be3b2bbe06cff9081bdc14" title="Darkens the background and opens AboutDialog." alt="" coords="257,5,441,32"/>
+<area shape="rect" id="node3" href="$class_main_window.html#abea251bdd0a192585a92e45fc0c9eb98" title="Сhanges the theme to the opposite." alt="" coords="232,56,465,83"/>
+<area shape="rect" id="node6" href="$class_main_window.html#a9bc91a00ed6229ba0b23fdf771055a1e" title="Deletes the location if its tab close button was pressed." alt="" coords="255,158,443,199"/>
+<area shape="rect" id="node7" href="$class_main_window.html#a812cec065735dc79b8bf968faef30be8" title="Darkens the background and opens NewLocationDialog." alt="" coords="237,224,461,251"/>
+<area shape="rect" id="node8" href="$class_main_window.html#a324c3d5bb8d73a43a73029b0c9c66925" title="Darkens the background and opens SettingsDialog." alt="" coords="259,275,439,317"/>
+<area shape="rect" id="node9" href="$class_main_window.html#a588a94b5856247831d038015ea13f29f" title="Restore all saved app data." alt="" coords="269,107,428,133"/>
+<area shape="rect" id="node11" href="$class_main_window.html#a84eb435f1f5047ac6d218c15cee0aa11" title="Starts updating all locations." alt="" coords="253,341,445,382"/>
+<area shape="rect" id="node4" href="$class_main_window.html#acc57d86037d0e7babbd0370c07092ab9" title="Set app theme to dark." alt="" coords="519,107,707,133"/>
+<area shape="rect" id="node5" href="$class_main_window.html#a7514fb0570dc8047fa134342053b6124" title="Set app theme to light." alt="" coords="519,56,708,83"/>
+<area shape="rect" id="node10" href="$class_main_window.html#adea8b8ce2e22afb8a9dc25e641d98cee" title="Restore all saved locations." alt="" coords="513,157,713,184"/>
+</map>

@@ -5,6 +5,8 @@
 #include <newlocationdialog.h>
 #include <darkoverlayeffect.h>
 
+
+
 MainWindow::MainWindow(QWidget *parent) : QWidget(parent, Qt::FramelessWindowHint)
 {
     setMinimumHeight(600);

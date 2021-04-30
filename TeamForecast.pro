@@ -22,8 +22,7 @@ SOURCES += \
     mainwindow.cpp \
     newlocationdialog.cpp \
     scrollareawrapper.cpp \
-    settingsdialog.cpp \
-    weathertools.cpp
+    settingsdialog.cpp
 
 HEADERS += \
     aboutdialog.h \
@@ -38,8 +37,7 @@ HEADERS += \
     mainwindow.h \
     newlocationdialog.h \
     scrollareawrapper.h \
-    settingsdialog.h \
-    weathertools.h
+    settingsdialog.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

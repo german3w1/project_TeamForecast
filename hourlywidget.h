@@ -1,9 +1,12 @@
 #ifndef HOURLYWIDGET_H
 #define HOURLYWIDGET_H
 
-#include <QDebug>
 #include <QJsonObject>
 #include <expandingweatherwidget.h>
+
+/**
+@brief Hourly weather forecast widget
+*/
 
 class HourlyWidget : public ExpandingWeatherWidget
 {
@@ -11,24 +14,24 @@ class HourlyWidget : public ExpandingWeatherWidget
 public:
     HourlyWidget(QWidget *parent = nullptr);
     ~HourlyWidget();
-    void update_widget_info(const QVariantMap &new_dataset, const int &today, const int &offset);
+    void updateWidgetInfo(const QVariantMap &new_dataset, const int &today, const int &offset);
 private:
-    QLabel *m_time;
-    QLabel *m_day;
-    QLabel *m_icon;
-    QLabel *m_temp;
-    QLabel *m_temp_value;
-    QLabel *m_feels_like;
-    QLabel *m_feels_like_value;
-    QLabel *m_pressure_value;
-    QLabel *m_humidity_value;
-    QLabel *m_dew_point_value;
-    QLabel *m_uv_ix_value;
-    QLabel *m_clouds_value;
-    QLabel *m_visibility_value;
-    QLabel *m_wind_value;
-   // QLabel *m_pop;
-   // QLabel *m_pop_value;
+    QLabel *time;
+    QLabel *day;
+    QLabel *icon;
+    QLabel *temp;
+    QLabel *temp_value;
+    QLabel *feels_like;
+    QLabel *feels_like_value;
+    QLabel *pressure_value;
+    QLabel *humidity_value;
+    QLabel *dew_point_value;
+    QLabel *uv_ix_value;
+    QLabel *clouds_value;
+    QLabel *visibility_value;
+    QLabel *wind_value;
+   // QLabel *pop;
+   // QLabel *pop_value;
 
 };
 

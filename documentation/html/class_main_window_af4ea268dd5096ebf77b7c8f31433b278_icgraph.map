@@ -1,0 +1,4 @@
+<map id="MainWindow::saveLocations" name="MainWindow::saveLocations">
+<area shape="rect" id="node1" title="Save locations." alt="" coords="220,5,407,32"/>
+<area shape="rect" id="node2" href="$class_main_window.html#a4e20a4a065fbb0e4d3532a45a0a91425" title="Overrided QWidget::closeEvent." alt="" coords="5,5,172,32"/>
+</map>

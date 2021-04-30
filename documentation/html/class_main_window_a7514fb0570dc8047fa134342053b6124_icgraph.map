@@ -1,0 +1,5 @@
+<map id="MainWindow::setLightTheme" name="MainWindow::setLightTheme">
+<area shape="rect" id="node1" title="Set app theme to light." alt="" coords="287,31,476,57"/>
+<area shape="rect" id="node2" href="$class_main_window.html#abea251bdd0a192585a92e45fc0c9eb98" title="Сhanges the theme to the opposite." alt="" coords="5,5,239,32"/>
+<area shape="rect" id="node3" href="$class_main_window.html#a588a94b5856247831d038015ea13f29f" title="Restore all saved app data." alt="" coords="43,56,201,83"/>
+</map>
