@@ -11,7 +11,10 @@ Created with love using Qt Creator 4.14.2 and QMake
 - Qt6Gui
 - Qt6Network
 - Qt6Widgets
-	
+
+## Documentation:
+- Use Doxygen. The code has already been commented to generate documentation using it
+
 ## Screenshots:
 ![1](https://user-images.githubusercontent.com/10806915/115854453-edceb880-a432-11eb-8bfd-2b502796c948.PNG)
 ![2](https://user-images.githubusercontent.com/10806915/115854464-f0c9a900-a432-11eb-9560-d13eb1401212.PNG)
