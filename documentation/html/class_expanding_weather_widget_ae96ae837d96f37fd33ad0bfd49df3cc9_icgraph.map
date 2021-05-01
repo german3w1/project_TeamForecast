@@ -1,6 +1,0 @@
-<map id="ExpandingWeatherWidget::generateBoldLabel" name="ExpandingWeatherWidget::generateBoldLabel">
-<area shape="rect" id="node1" title=" " alt="" coords="249,49,423,90"/>
-<area shape="rect" id="node2" href="$class_current_widget.html#a188dde642577f406a81677acb11f4075" title=" " alt="" coords="5,5,201,32"/>
-<area shape="rect" id="node3" href="$class_daily_widget.html#ae6918429e54d243f46b5dd89ee0ed209" title=" " alt="" coords="18,56,189,83"/>
-<area shape="rect" id="node4" href="$class_hourly_widget.html#a535f0289c341d0b428031acba5254b47" title=" " alt="" coords="10,107,197,133"/>
-</map>
