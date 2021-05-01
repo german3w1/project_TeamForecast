@@ -14,6 +14,7 @@ Created with love using Qt Creator 4.14.2 and QMake
 
 ## Documentation:
 - Use Doxygen. The code has already been commented to generate documentation using it
+- You can read already generated documentation [here](https://german3w1.github.io/project_TeamForecast/html/index.html)
 
 ## Screenshots:
 ![1](https://user-images.githubusercontent.com/10806915/115854453-edceb880-a432-11eb-8bfd-2b502796c948.PNG)
