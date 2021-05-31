@@ -112,7 +112,7 @@ void LocationForecast::onRequestProcessed(QNetworkReply *reply)
          QVariantMap data_map = json_answer.toVariant().toMap();
          int offset = data_map["timezone_offset"].toInt();
          QVariantMap current_dataset = data_map["current"].toMap();
-         int today = QDateTime::fromSecsSinceEpoch(current_dataset["dt"].toLongLong(), Qt::OffsetFromUTC, offset).date().day();
+         QDateTime today = QDateTime::fromSecsSinceEpoch(current_dataset["dt"].toLongLong(), Qt::OffsetFromUTC, offset);
          QVariantList hourly_dataset = data_map["hourly"].toList();
          QVariantList daily_dataset = data_map["daily"].toList();
 

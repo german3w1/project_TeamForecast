@@ -14,7 +14,7 @@ class HourlyWidget : public ExpandingWeatherWidget
 public:
     HourlyWidget(QWidget *parent = nullptr);
     ~HourlyWidget();
-    void updateWidgetInfo(const QVariantMap &new_dataset, const int &today, const int &offset);
+    void updateWidgetInfo(const QVariantMap &new_dataset, const QDateTime &today, const int &offset);
 private:
     QLabel *time;
     QLabel *day;

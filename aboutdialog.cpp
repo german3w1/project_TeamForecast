@@ -24,7 +24,7 @@ AboutDialog::AboutDialog(QWidget *parent) : QDialog(parent, Qt::FramelessWindowH
     logo_layout->addWidget(ow_logo);
     logo_layout->addWidget(qt_logo);
 
-    auto version = new QLabel("v1.8.1");
+    auto version = new QLabel("v1.8.2");
     version->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     auto author = new QLabel("German Petrin, 2021");
     author->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
