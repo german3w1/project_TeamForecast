@@ -13,7 +13,9 @@ Apply this effect to the widget you want to darken
 class DarkOverlayEffect : public QGraphicsEffect
 {
 public:
-    DarkOverlayEffect();
+    DarkOverlayEffect(double opacity = 0.3);
+private:
+    double opacity_;
 protected:
     /**
     @brief Overrided QGraphicEffect::draw

@@ -9,35 +9,65 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    aboutdialog.cpp \
-    basiclocationdialog.cpp \
-    currentwidget.cpp \
-    dailywidget.cpp \
+    base/animatedbutton.cpp \
+    base/animatedwidget.cpp \
+    base/textwidget.cpp \
+    dialogs/aboutdialog.cpp \
+    hintwidget.cpp \
+    models/abstractweathermodel.cpp \
+    base/appstyle.cpp \
+    dialogs/basiclocationdialog.cpp \
+    models/currentmodel.cpp \
+    views/currentwidget.cpp \
+    models/dailymodel.cpp \
+    views/dailywidget.cpp \
     darkoverlayeffect.cpp \
-    editlocationdialog.cpp \
-    expandingweatherwidget.cpp \
-    hourlywidget.cpp \
-    locationforecast.cpp \
+    dialogs/editlocationdialog.cpp \
+    views/expandingweatherwidget.cpp \
+    models/hourlymodel.cpp \
+    views/hourlywidget.cpp \
+    views/locationforecast.cpp \
+    views/locationminiview.cpp \
+    models/locationmodel.cpp \
+    models/locationsmanager.cpp \
+    dialogs/locationsmanagerview.cpp \
     main.cpp \
     mainwindow.cpp \
-    newlocationdialog.cpp \
-    scrollareawrapper.cpp \
-    settingsdialog.cpp
+    dialogs/newlocationdialog.cpp \
+    dialogs/roundeddialog.cpp \
+    roundedmenu.cpp \
+    base/scrollareawrapper.cpp \
+    dialogs/settingsdialog.cpp
 
 HEADERS += \
-    aboutdialog.h \
-    basiclocationdialog.h \
-    currentwidget.h \
-    dailywidget.h \
+    base/animatedbutton.h \
+    base/animatedwidget.h \
+    base/textwidget.h \
+    dialogs/aboutdialog.h \
+    hintwidget.h \
+    models/abstractweathermodel.h \
+    base/appstyle.h \
+    dialogs/basiclocationdialog.h \
+    models/currentmodel.h \
+    views/currentwidget.h \
+    models/dailymodel.h \
+    views/dailywidget.h \
     darkoverlayeffect.h \
-    editlocationdialog.h \
-    expandingweatherwidget.h \
-    hourlywidget.h \
-    locationforecast.h \
+    dialogs/editlocationdialog.h \
+    views/expandingweatherwidget.h \
+    models/hourlymodel.h \
+    views/hourlywidget.h \
+    views/locationforecast.h \
+    views/locationminiview.h \
+    models/locationmodel.h \
+    models/locationsmanager.h \
+    dialogs/locationsmanagerview.h \
     mainwindow.h \
-    newlocationdialog.h \
-    scrollareawrapper.h \
-    settingsdialog.h
+    dialogs/newlocationdialog.h \
+    dialogs/roundeddialog.h \
+    roundedmenu.h \
+    base/scrollareawrapper.h \
+    dialogs/settingsdialog.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

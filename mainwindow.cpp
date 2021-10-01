@@ -1,14 +1,15 @@
 #include "mainwindow.h"
-#include "locationforecast.h"
-#include <aboutdialog.h>
-#include <settingsdialog.h>
-#include <newlocationdialog.h>
-#include <darkoverlayeffect.h>
-
+#include <qdebug.h>
 
 
 MainWindow::MainWindow(QWidget *parent) : QWidget(parent, Qt::FramelessWindowHint)
 {
+    location_forecast = new LocationForecast(this);
+    //location_forecast->hide();
+
+    connect(location_forecast, &LocationForecast::modelChanged,
+            this, &MainWindow::onLocationModelChanged);
+    locations_manager = new LocationsManager(this, location_forecast);
     setMinimumHeight(600);
     setMinimumWidth(1100);
     //resize(1100, 600);
@@ -18,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent, Qt::FramelessWindowHin
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Ignored);
     setLayout(main_layout);
 
-    auto control_frame = new QFrame;
+    control_frame = new QFrame;
     auto control_layout = new QHBoxLayout;
     control_layout->setContentsMargins(0, 0, 0, 0);
     control_layout->setSpacing(0);
@@ -27,62 +28,76 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent, Qt::FramelessWindowHin
 
     add_btn = new QPushButton;
     add_btn->setIconSize(QSize(18, 18));
-    add_btn->setMinimumHeight(add_btn->sizeHint().height() * 1.4);
-    connect(add_btn, &QPushButton::clicked, this, &MainWindow::newLocationRequest);
+    add_btn->setMinimumHeight(add_btn->sizeHint().height() * 1.5);
+    connect(add_btn, &QPushButton::clicked,
+            this, &MainWindow::openNewLocationDialog);
 
     settings_btn = new QPushButton;
     settings_btn->setIconSize(QSize(18, 18));
-    settings_btn->setMinimumHeight(add_btn->sizeHint().height() * 1.4);
-    connect(settings_btn, &QPushButton::clicked, this, &MainWindow::openSettingsRequest);
+    settings_btn->setMinimumHeight(add_btn->sizeHint().height() * 1.5);
+    connect(settings_btn, &QPushButton::clicked,
+            this, &MainWindow::openSettingsDialog);
 
-    auto about_btn = new QPushButton("TeamForecast");
-    about_btn->setFixedHeight(add_btn->sizeHint().height() * 1.4);
-    connect(about_btn, &QPushButton::clicked, this, &MainWindow::aboutRequest);
+    auto about_btn = new AnimatedButton("TeamForecast", ROLE::SECONDARY, 0);
+    about_btn->setFixedHeight(add_btn->sizeHint().height() * 1.5);
+    connect(about_btn, &AnimatedButton::clicked,
+            this, &MainWindow::openAboutDialog);
 
     switch_btn = new QPushButton;
     switch_btn->setIconSize(QSize(18, 18));
-    switch_btn->setMinimumHeight(add_btn->sizeHint().height() * 1.4);
-    connect(switch_btn, &QPushButton::clicked, this, &MainWindow::changeThemeRequest);
+    switch_btn->setMinimumHeight(add_btn->sizeHint().height() * 1.5);
+    connect(switch_btn,
+            &QPushButton::clicked,
+            this,
+            [&]() {
+                switch_btn->setEnabled(false);
 
-    move_area = new QLabel;
+                if (dark_theme_enabled)
+                    setLightTheme();
+                else
+                    setDarkTheme();
+
+                switch_btn->setEnabled(true);
+            });
+
+    locations_btn = new AnimatedButton("Менеджер локаций", ROLE::SECONDARY, 0);
+    locations_btn->setMinimumHeight(add_btn->sizeHint().height() * 1.5);
+    connect(locations_btn, &AnimatedButton::clicked,
+            this, &MainWindow::openLocationManager);
 
     collapse_btn = new QPushButton;
     collapse_btn->setIconSize(QSize(18, 18));
-    collapse_btn->setMinimumHeight(add_btn->sizeHint().height() * 1.4);
-    connect(collapse_btn, &QPushButton::clicked, this, &QWidget::showMinimized);
+    collapse_btn->setMinimumHeight(add_btn->sizeHint().height() * 1.5);
+    connect(collapse_btn, &QPushButton::clicked,
+            this, &QWidget::showMinimized);
 
-
-    close_btn = new QPushButton();
+    close_btn = new QPushButton;
     close_btn->setIconSize(QSize(18, 18));
-    close_btn->setMinimumHeight(add_btn->sizeHint().height() * 1.4);
-    connect(close_btn, &QPushButton::clicked, qApp, &QApplication::quit);
+    close_btn->setMinimumHeight(add_btn->sizeHint().height() * 1.5);
+    connect(close_btn, &QPushButton::clicked,
+            qApp, &QApplication::quit);
 
     control_layout->addWidget(about_btn, 4);
-
     control_layout->addWidget(switch_btn, 1);
     control_layout->addWidget(add_btn, 1);
-    control_layout->addWidget(move_area, 12);control_layout->addWidget(settings_btn, 1);
+    control_layout->addWidget(locations_btn, 9);
+    control_layout->addStretch(3);
+    control_layout->addWidget(settings_btn, 1);
     control_layout->addWidget(collapse_btn, 1);
     control_layout->addWidget(close_btn, 1);
 
-    locations = new QTabWidget;
-    locations->setMovable(true);
-    locations->setTabsClosable(true);
-    locations->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Ignored);
-    connect(locations, &QTabWidget::tabCloseRequested, this, &MainWindow::deleteLocationRequest);
 
-    locations->setStyleSheet("QTabBar {padding: 0px; margin: 0px }"
-                             "QTabBar::close-button {image: url(:/icons/close);}"
-                             "QTabWidget::pane {background: transparent}"
-                             "QTabBar::close-button:hover {image: url(:/icons/close_hover);}");
+    hint_widget_ = new HintWidget(this);
+    hint_widget_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    main_layout->addWidget(control_frame);
-    main_layout->addWidget(locations);
+    main_layout->addWidget(control_frame, 0, Qt::AlignTop);
+    main_layout->addWidget(location_forecast);
+    main_layout->addWidget(hint_widget_);
 
-    update_timer = new QTimer(this);
-    connect(update_timer, &QTimer::timeout, this, &MainWindow::updateWeatherRequest);
 
     restoreAll();
+    location_forecast->hide();
+    dumpObjectInfo();
 }
 
 MainWindow::~MainWindow()
@@ -90,14 +105,63 @@ MainWindow::~MainWindow()
 
 }
 
-void MainWindow::changeThemeRequest()
+void MainWindow::onLocationModelChanged(LocationModel *model)
 {
-    switch_btn->setEnabled(false);
+    if (model) {
+        if (location_forecast->isHidden()) {
+            location_forecast->show();
+            hint_widget_->hide();
+        }
+        locations_btn->setText(model->label());
+    }
+    else {
+        location_forecast->hide();
+        hint_widget_->show();
+    }
+}
 
-    if (dark_theme_enabled) setLightTheme();
-    else setDarkTheme();
+void MainWindow::openAboutDialog()
+{
+    AboutDialog* d;
+    if (location_forecast->isVisible())
+        d = new AboutDialog(this, location_forecast);
+    else
+        d = new AboutDialog(this, hint_widget_);
+    d->open();
+}
 
-    switch_btn->setEnabled(true);
+void MainWindow::openSettingsDialog()
+{
+    SettingsDialog* d;
+    if (location_forecast->isVisible())
+        d = new SettingsDialog(this, location_forecast);
+    else
+        d = new SettingsDialog(this, hint_widget_);
+    d->open();
+}
+
+void MainWindow::openNewLocationDialog()
+{
+    NewLocationDialog* d;
+    if (location_forecast->isVisible())
+        d = new NewLocationDialog(this, locations_manager, location_forecast);
+    else
+        d = new NewLocationDialog(this, locations_manager, hint_widget_);
+    d->open();
+}
+
+void MainWindow::openLocationManager()
+{
+    if (location_forecast->isVisible())
+        location_manager_view = new LocationsManagerView(this,
+                                                         locations_manager,
+                                                         location_forecast);
+    else
+        location_manager_view = new LocationsManagerView(this,
+                                                         locations_manager,
+                                                         hint_widget_);
+    location_manager_view->resize(locations_btn->width(), control_frame->height() * 9);
+    location_manager_view->show();
 }
 
 void MainWindow::setLightTheme()
@@ -109,10 +173,6 @@ void MainWindow::setLightTheme()
                   "QSlider::sub-page:horizontal {background: black;}"
                   "QPushButton { background: white; color: black; font: 14px;}"
                   "QPushButton::hover { background-color: #E0E0E0 }"
-                  "MainWindow > QFrame {background-color: white}"
-                  "QDialog { background: white }"
-                  "QDialog QLabel { font: bold 12px; color: black; }"
-                  "QDialog QPushButton { font: bold 14px; border-radius: 16px }"
                   "QRadioButton {font: 12px; color: black }"
                   "QRadioButton::indicator { height: 16px; width: 16px }"
                   "QRadioButton::indicator::unchecked { image: url(:/icons/radio_unchecked_light) }"
@@ -120,16 +180,13 @@ void MainWindow::setLightTheme()
                   "QRadioButton#favorite_checkbox::indicator { height: 20px; width: 20px}"
                   "QRadioButton#favorite_checkbox::indicator:checked {image: url(:/icons/favorite_checked)}"
                   "QRadioButton#favorite_checkbox::indicator:unchecked {image: url(:/icons/favorite_unchecked)}"
-                  "BasicLocationDialog QLabel { font: bold 12px; color: #757575; }"
-                  "BasicLocationDialog QLineEdit { background: transparent; border-bottom: 2px solid #E0E0E0; color:#757575; selection-background-color: black; selection-color: white; }"
+                  "LocationsManagerView > QLineEdit {background: #E0E0E0; color: black;}"
                   "LocationForecast QWidget { color: white; }"
-                  "LocationForecast { background: white; border-radius: 0px }"
                   "QFrame#control_panel_frame {background: rgb(255, 171, 64); border-radius: 12px}"
                   "LocationForecast QPushButton { background: rgb(255, 171, 64);font: bold 14px; border-radius: 12px }"
                   "LocationForecast QPushButton::hover { background-color: rgb(255, 152, 0) }"
                   "QFrame#forecast_frame { background: white }"
                   "QFrame#scroll_frame { background: white}"
-                  "ExpandingWeatherWidget {background: rgb(255, 171, 64); border-radius: 12px}"
                   "QLabel#title_label { background: white; color: black; font: bold 20px}"
                   "QLabel#val_label { font: 14px }"
                   "QLabel#last_update_time {font: bold 14px}");
@@ -140,7 +197,10 @@ void MainWindow::setLightTheme()
     collapse_btn->setIcon(QIcon(":/icons/app_minimize_light"));
     close_btn->setIcon(QIcon(":/icons/app_close_light"));
 
+
+    AppStyle::setTheme("default_day");
     dark_theme_enabled = false;
+    repaint();
 }
 
 void MainWindow::setDarkTheme()
@@ -153,12 +213,8 @@ void MainWindow::setDarkTheme()
                   "QStackedWidget#qt_tabwidget_stackedwidget {background: rgb(55, 71, 79)}"
                   "QPushButton { background: rgb(55, 71, 79); color: white; font: 14px }"
                   "QPushButton::hover { background-color: #2d3940 }"
-                  "MainWindow > QFrame {background-color: rgb(55, 71, 79)}"
                   "QFrame > PushButton { background: rgb(55, 71, 79); color: white; font: 14px }"
                   "QFrame > QPushButton::hover { background-color: #2d3940 }"
-                  "QDialog { background: rgb(55, 71, 79); }"
-                  "QDialog QLabel {font: bold 12px; color: white}"
-                  "QDialog QPushButton { font: bold 14px; border-radius: 16px }"
                   "QGroupBox {font-size: 14px; color: white }"
                   "QRadioButton {font: 12px; color: white }"
                   "QRadioButton::indicator { height: 16px; width: 16px }"
@@ -167,10 +223,8 @@ void MainWindow::setDarkTheme()
                   "QRadioButton#favorite_checkbox::indicator { height: 20px; width: 20px}"
                   "QRadioButton#favorite_checkbox::indicator:checked {image: url(:/icons/favorite_checked)}"
                   "QRadioButton#favorite_checkbox::indicator:unchecked {image: url(:/icons/favorite_unchecked)}"
-                  "BasicLocationDialog QLabel { font: bold 12px; color: white; }"
-                  "BasicLocationDialog QLineEdit { background: transparent; border-bottom: 2px solid #E0E0E0; color: white; selection-background-color: white; selection-color: black }"
-                  "LocationForecast QWidget { color: white;  }"
-                  "LocationForecast { background: rgb(55, 71, 79); border-radius: 0px }"
+                  "LocationsManagerView > QLineEdit {background: #2d3940; color: white;}"
+                  "LocationForecast QWidget { color: white; }"
                   "LocationForecast QPushButton {font: bold 14px; background-color: rgb(1, 87, 155); border-radius: 12px}"
                   "LocationForecast QPushButton::hover {background: rgb(1, 75,133) }"
                   "QFrame#control_panel_frame {background-color: rgb(1, 87, 155); border-radius: 12px}"
@@ -178,8 +232,7 @@ void MainWindow::setDarkTheme()
                   "QFrame#scroll_frame {background: rgb(55, 71, 79)}"
                   "QLabel#title_label {background: rgb(55, 71, 79); color: white; font: bold 20px }"
                   "QLabel#val_label { font: 14px }"
-                  "QLabel#last_update_time {font: bold 14px}"
-                  "ExpandingWeatherWidget {background: rgb(1, 87, 155); border-radius: 12px}");
+                  "QLabel#last_update_time {font: bold 14px}");
 
     settings_btn->setIcon(QIcon(":/icons/settings_dark"));
     switch_btn->setIcon(QIcon(":/icons/app_switch_theme_dark"));
@@ -187,40 +240,9 @@ void MainWindow::setDarkTheme()
     collapse_btn->setIcon(QIcon(":/icons/app_minimize_dark"));
     close_btn->setIcon(QIcon(":/icons/app_close_dark"));
 
+    AppStyle::setTheme("default_night");
     dark_theme_enabled = true;
-}
-
-void MainWindow::newLocationRequest()
-{
-    setGraphicsEffect(new DarkOverlayEffect);
-    NewLocationDialog(this, locations);
-    delete graphicsEffect();
-}
-
-void MainWindow::aboutRequest()
-{
-    setGraphicsEffect(new DarkOverlayEffect);
-    AboutDialog(this);
-    delete graphicsEffect();
-}
-
-void MainWindow::deleteLocationRequest(int index)
-{
-   locations->widget(index)->deleteLater();
-}
-
-void MainWindow::updateWeatherRequest()
-{
-    auto n = locations->count();
-    for (auto i = 0; i < n; i++)
-        qobject_cast<LocationForecast*>(locations->widget(i))->weatherUpdateRequested();
-}
-
-void MainWindow::openSettingsRequest()
-{
-    setGraphicsEffect(new DarkOverlayEffect);
-    SettingsDialog(this);
-    delete graphicsEffect();
+    repaint();
 }
 
 void MainWindow::restoreAll()
@@ -250,13 +272,13 @@ void MainWindow::restoreLocations()
         //qDebug() << each_location["lat"].toString() << each_location["lon"].toString() << each_location["name"].toString();
         auto new_location = new LocationForecast(each_location["lat"].toString(), each_location["lon"].toString());
         new_location->setFavorite(each_location["is_favorite"].toBool());
-        locations->addTab(new_location, each_location["name"].toString());
+        //locations->addTab(new_location, each_location["name"].toString());
     }
 
 }
 
 void MainWindow::saveLocations(bool only_favorite)
-{
+{ /*
     auto n = locations->count();
     QJsonArray locations_array;
     if (only_favorite)
@@ -289,7 +311,7 @@ void MainWindow::saveLocations(bool only_favorite)
     locations_list.open(QFile::WriteOnly | QFile::Text | QFile::Truncate);
     locations_list.write(doc.toJson());
     locations_list.close();
-
+*/
 }
 
 
@@ -309,22 +331,63 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
+    /*
+    if (auto lmv = location_manager_view; lmv != nullptr
+        && !lmv->rect().contains(mapToGlobal(event->pos())) && lmv->isVisible()) {
+        lmv->deleteLater();
+        location_manager_view = nullptr;
+    }*/
     QWidget::mousePressEvent(event);
-    if ((event->button() == Qt::LeftButton) && move_area->geometry().contains(event->pos())) {
-        offset = event->pos();
-        moving_in_move_area = true;
-    }
 
 }
 void MainWindow::mouseMoveEvent(QMouseEvent *event)
 {
-    QWidget::mouseMoveEvent(event);
+    QWidget::mouseMoveEvent(event); /*
     if (moving_in_move_area)
-        move(event->globalPos() - offset);
+        move(mapToGlobal(event->pos()) - offset);*/
 }
 void MainWindow::mouseReleaseEvent(QMouseEvent *event)
 {
     QWidget::mouseReleaseEvent(event);
     moving_in_move_area = false;
+}
 
+void MainWindow::paintEvent(QPaintEvent *event)
+{
+    Q_UNUSED(event);
+
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.setBrush(QBrush(AppStyle::backgroundColor(ROLE::SECONDARY, STATE::NORMAL)));
+    painter.setPen(Qt::NoPen);
+
+    painter.drawRect(rect());
+/*
+    if (location_forecast->isHidden() && location_forecast->isEnabled()) {
+       painter.setPen(AppStyle::textPrimaryColor());
+       if (add_btn) {
+           auto ab_rect = add_btn->geometry();
+           painter.drawLine(ab_rect.center().x(),
+                            ab_rect.bottom(),
+                            ab_rect.center().x() - rect().width() / 16,
+                            ab_rect.bottom() + rect().height() / 6);
+
+           QString add_str("Добавьте локацию");
+           painter.drawText(ab_rect.center().x() - rect().width() / 16 - 16,
+                            ab_rect.bottom() + rect().height() / 6 + 16,
+                            add_str);
+       }
+       if (locations_btn && locations_manager && locations_manager->count()) {
+           auto lb_rect = locations_btn->geometry();
+           painter.drawLine(lb_rect.center().x(),
+                            lb_rect.bottom(),
+                            lb_rect.center().x() + rect().width() / 8,
+                            lb_rect.bottom() + rect().height() / 8);
+
+           QString ch_str("Или выберите из существующих");
+           painter.drawText(lb_rect.center().x() + rect().width() / 8 - 16,
+                            lb_rect.bottom() + rect().height() / 8 + 16,
+                            ch_str);
+       }
+    }*/
 }

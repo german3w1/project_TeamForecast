@@ -7,13 +7,22 @@
 #include <QTabWidget>
 #include <QTabBar>
 #include <QVBoxLayout>
-#include <QTimer>
 #include <QFile>
 #include <QMouseEvent>
 #include <QLabel>
 #include <QSettings>
 #include <QStandardPaths>
 #include <QJsonArray>
+#include <models/locationmodel.h>
+#include <views/locationforecast.h>
+#include <base/appstyle.h>
+#include "views/locationforecast.h"
+#include <dialogs/locationsmanagerview.h>
+#include <dialogs/aboutdialog.h>
+#include <dialogs/settingsdialog.h>
+#include <dialogs/newlocationdialog.h>
+#include <darkoverlayeffect.h>
+#include <hintwidget.h>
 
 /**
 @brief Main application window
@@ -30,43 +39,31 @@ class MainWindow : public QWidget
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    LocationForecast *location_view() { return location_forecast; }
 private slots:
-    /**
-    @brief Darkens the background and opens AboutDialog
-    */
-    void aboutRequest();
-    /**
-    @brief Darkens the background and opens NewLocationDialog
-    */
-    void newLocationRequest();
-    /**
-    @brief Deletes the location if its tab close button was pressed
-    */
-    void deleteLocationRequest(int index);
-    /**
-    @brief Сhanges the theme to the opposite
-    */
-    void changeThemeRequest();
-    /**
-    @brief Starts updating all locations
-    */
-    void updateWeatherRequest();
-    /**
-    @brief Darkens the background and opens SettingsDialog
-    */
-    void openSettingsRequest();
+    void onLocationModelChanged(LocationModel *model);
+    void openAboutDialog();
+    void openSettingsDialog();
+    void openNewLocationDialog();
+    void openLocationManager();
 private:
     QPoint offset;
     bool moving_in_move_area; ///<  Property indicates that user pressed move_area
     bool dark_theme_enabled;
+    HintWidget *hint_widget_;
+    QFrame *control_frame;
     QPushButton *settings_btn; ///< Open settings button
     QPushButton *add_btn; ///< Add new location button
     QPushButton *collapse_btn; ///< App collapse button
     QPushButton *close_btn; ///< Close app button
     QPushButton *switch_btn; ///< Switch app theme button
+    AnimatedButton *locations_btn;
     QLabel *move_area; ///< An area that you can pull to move the application window
-    QTabWidget *locations; ///< QTabWidget containing all opened locations
-    QTimer *update_timer;
+    QLabel *hello_world;
+    LocationsManager* locations_manager;
+    LocationsManagerView* location_manager_view;
+    LocationForecast* location_forecast;
+    void openDialog(RoundedDialog *dialog);
     /**
     @brief Set app theme to light
     @note All buttons and layouts of mainwindow must be created until calling this function
@@ -139,5 +136,7 @@ protected:
     and the application window stops moving behind the cursor
     */
     void mouseReleaseEvent(QMouseEvent *event);
+
+    virtual void paintEvent(QPaintEvent *event);
 };
 #endif // MAINWINDOW_H
