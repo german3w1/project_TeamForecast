@@ -2,6 +2,7 @@
 #define SETTINGSDIALOG_H
 
 #include <dialogs/roundeddialog.h>
+#include <models/locationsmanager.h>
 #include <QGroupBox>
 #include <QLabel>
 #include <QRadioButton>

@@ -10,9 +10,13 @@ class LocationsManagerView : public RoundedDialog
 {
     Q_OBJECT
 public:
-    LocationsManagerView(QWidget *parent, LocationsManager* manager, QWidget *dimmable_widget = nullptr);
+    static LocationsManagerView* create(QWidget *parent, LocationsManager* manager,
+                                 QWidget *dimmable_widget = nullptr);
     virtual ~LocationsManagerView();
 private:
+    LocationsManagerView(QWidget *parent, LocationsManager* manager,
+                         QWidget *dimmable_widget = nullptr);
+    static LocationsManagerView *instance_;
     QLineEdit *search_line;
     QGridLayout *layout;
     ScrollAreaWrapper *locations_list;

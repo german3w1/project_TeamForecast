@@ -108,7 +108,11 @@ void SettingsDialog::saveSettings()
     else
         settings.setValue("save_mode", 2);
 
-    settings.setValue("update_interval", interval_slider->value());
+    if (auto interval = interval_slider->value() * 1000; settings.value("update_interval").toInt() != interval) {
+        settings.setValue("update_interval", interval);
+        auto location_manager = LocationsManager::getInstance();
+        location_manager->setUpdateInterval(interval);
+    }
 
     deleteLater();
 }

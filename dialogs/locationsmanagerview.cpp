@@ -1,6 +1,16 @@
 #include "dialogs/locationsmanagerview.h"
 #include <QLabel>
 
+LocationsManagerView* LocationsManagerView::instance_ = nullptr;
+
+LocationsManagerView *LocationsManagerView::create(QWidget *parent, LocationsManager *manager, QWidget *dimmable_widget)
+{
+    if (instance_ == nullptr) {
+        instance_ = new LocationsManagerView(parent, manager, dimmable_widget);
+    }
+    return instance_;
+}
+
 LocationsManagerView::LocationsManagerView(QWidget *parent,
                                            LocationsManager* manager,
                                            QWidget *dimmable_widget)
@@ -36,7 +46,7 @@ LocationsManagerView::LocationsManagerView(QWidget *parent,
 
 LocationsManagerView::~LocationsManagerView()
 {
-
+    instance_ = nullptr;
 }
 
 void LocationsManagerView::onContentChanged()

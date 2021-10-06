@@ -148,6 +148,7 @@ void LocationForecast::onUpdateFinished()
     latitude->setText(model_->latitude());
     longitude->setText(model_->longitude());
     last_update_time->setText(model_->updateTime());
+    favorite_checkbox->setChecked(model_->isFavourite());
 
     emit modelChanged(model_);
     update_btn->setEnabled(true);

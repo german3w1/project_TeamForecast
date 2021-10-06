@@ -110,7 +110,7 @@ void LocationModel::onRequestProcessed(QNetworkReply *reply)
     }
 
     connect(reply, &QNetworkReply::destroyed,
-           network_manager, &QNetworkAccessManager::deleteLater);
+            network_manager, &QNetworkAccessManager::deleteLater);
     reply->deleteLater();
 }
 

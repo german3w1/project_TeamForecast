@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent, Qt::FramelessWindowHin
 
     connect(location_forecast, &LocationForecast::modelChanged,
             this, &MainWindow::onLocationModelChanged);
-    locations_manager = new LocationsManager(this, location_forecast);
+    locations_manager = LocationsManager::getInstance(this, location_forecast);
     setMinimumHeight(600);
     setMinimumWidth(1100);
     //resize(1100, 600);
@@ -153,11 +153,11 @@ void MainWindow::openNewLocationDialog()
 void MainWindow::openLocationManager()
 {
     if (location_forecast->isVisible())
-        location_manager_view = new LocationsManagerView(this,
+        location_manager_view = LocationsManagerView::create(this,
                                                          locations_manager,
                                                          location_forecast);
     else
-        location_manager_view = new LocationsManagerView(this,
+        location_manager_view = LocationsManagerView::create(this,
                                                          locations_manager,
                                                          hint_widget_);
     location_manager_view->resize(locations_btn->width(), control_frame->height() * 9);
@@ -247,7 +247,8 @@ void MainWindow::setDarkTheme()
 
 void MainWindow::restoreAll()
 {
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, "TeamForecast", "TeamForecast");
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope,
+                       "TeamForecast", "TeamForecast");
 
     if (bool dark_mode = settings.value("dark_by_default").toBool(); dark_mode == true)
         setDarkTheme();
@@ -256,6 +257,9 @@ void MainWindow::restoreAll()
 
     if (int save_mode = settings.value("save_mode").toInt(); save_mode == 1 || save_mode == 2)
         restoreLocations();
+/*
+    locations_manager->setUpdateInterval(
+                settings.value("update_interval").toInt()); */
 }
 
 void MainWindow::restoreLocations()
