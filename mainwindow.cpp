@@ -97,7 +97,6 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent, Qt::FramelessWindowHin
 
     restoreAll();
     location_forecast->hide();
-    dumpObjectInfo();
 }
 
 MainWindow::~MainWindow()
