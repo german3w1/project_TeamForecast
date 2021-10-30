@@ -1,4 +1,4 @@
-#include "src/models/currentmodel.h"
+#include "models/currentmodel.h"
 
 CurrentModel::CurrentModel()
     : AbstractWeatherModel()

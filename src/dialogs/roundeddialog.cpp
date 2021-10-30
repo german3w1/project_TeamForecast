@@ -1,4 +1,4 @@
-#include "src/dialogs/roundeddialog.h"
+#include "dialogs/roundeddialog.h"
 #include <QDebug>
 
 QStack<RoundedDialog*> RoundedDialog::opened_dialogs_ = QStack<RoundedDialog*>();

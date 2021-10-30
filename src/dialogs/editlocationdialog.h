@@ -1,8 +1,8 @@
 #ifndef EDITLOCATIONDIALOG_H
 #define EDITLOCATIONDIALOG_H
 
-#include <src/dialogs/basiclocationdialog.h>
-#include <src/views/locationforecast.h>
+#include <dialogs/basiclocationdialog.h>
+#include <views/locationforecast.h>
 
 /**
 @brief Modal dialog used for editing data of the location widget from which it was called

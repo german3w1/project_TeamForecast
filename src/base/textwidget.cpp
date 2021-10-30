@@ -1,4 +1,4 @@
-#include "src/base/textwidget.h"
+#include "base/textwidget.h"
 
 TextWidget::TextWidget(QString text, int size, bool bold, ROLE role, QWidget* parent)
     : BaseWidget(parent)

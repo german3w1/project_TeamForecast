@@ -1,4 +1,4 @@
-#include "src/base/animatedbutton.h"
+#include "base/animatedbutton.h"
 
 AnimatedButton::AnimatedButton(QString text, ROLE role, int radius, QWidget* parent)
     : AnimatedWidget(parent)

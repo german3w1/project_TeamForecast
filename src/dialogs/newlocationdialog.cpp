@@ -1,4 +1,4 @@
-#include "src/dialogs/newlocationdialog.h"
+#include "dialogs/newlocationdialog.h"
 
 NewLocationDialog::NewLocationDialog(QWidget* parent, LocationsManager* manager, QWidget* dimmable_widget)
     : BasicLocationDialog(parent, dimmable_widget)

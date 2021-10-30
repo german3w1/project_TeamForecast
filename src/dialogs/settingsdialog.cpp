@@ -1,4 +1,4 @@
-#include "src/dialogs/settingsdialog.h"
+#include "dialogs/settingsdialog.h"
 
 SettingsDialog::SettingsDialog(QWidget* parent, QWidget* dimmable_widget)
     : RoundedDialog(parent, dimmable_widget)

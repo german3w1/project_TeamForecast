@@ -13,12 +13,12 @@
 #include <QString>
 #include <QVBoxLayout>
 #include <QWidget>
-#include <src/base/animatedbutton.h>
-#include <src/base/scrollareawrapper.h>
-#include <src/models/locationmodel.h>
-#include <src/views/currentwidget.h>
-#include <src/views/dailywidget.h>
-#include <src/views/hourlywidget.h>
+#include <base/animatedbutton.h>
+#include <base/scrollareawrapper.h>
+#include <models/locationmodel.h>
+#include <views/currentwidget.h>
+#include <views/dailywidget.h>
+#include <views/hourlywidget.h>
 
 /**
 @brief Widget implementing user location

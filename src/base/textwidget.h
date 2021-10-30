@@ -2,8 +2,8 @@
 #define TEXTWIDGET_H
 
 #include <QPainter>
-#include <src/base/appstyle.h>
-#include <src/base/basewidget.h>
+#include <base/appstyle.h>
+#include <base/basewidget.h>
 
 class TextWidget : public BaseWidget {
     Q_OBJECT

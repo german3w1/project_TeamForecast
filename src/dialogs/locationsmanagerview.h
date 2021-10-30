@@ -1,10 +1,10 @@
 #ifndef LOCATIONSMANAGERVIEW_H
 #define LOCATIONSMANAGERVIEW_H
 #include <QLineEdit>
-#include <src/base/scrollareawrapper.h>
-#include <src/dialogs/roundeddialog.h>
-#include <src/models/locationsmanager.h>
-#include <src/views/locationminiview.h>
+#include <base/scrollareawrapper.h>
+#include <dialogs/roundeddialog.h>
+#include <models/locationsmanager.h>
+#include <views/locationminiview.h>
 
 class LocationsManagerView : public RoundedDialog {
     Q_OBJECT

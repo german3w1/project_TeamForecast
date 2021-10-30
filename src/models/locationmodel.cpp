@@ -1,4 +1,4 @@
-#include "src/models/locationmodel.h"
+#include "models/locationmodel.h"
 
 LocationModel::LocationModel()
 {

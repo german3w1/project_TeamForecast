@@ -4,10 +4,10 @@
 #include <QGraphicsColorizeEffect>
 #include <QPainter>
 #include <QStack>
-#include <src/base/animatedbutton.h>
-#include <src/base/appstyle.h>
-#include <src/base/textwidget.h>
-#include <src/darkoverlayeffect.h>
+#include <base/animatedbutton.h>
+#include <base/appstyle.h>
+#include <base/textwidget.h>
+#include <darkoverlayeffect.h>
 
 class RoundedDialog : public QDialog {
     Q_OBJECT

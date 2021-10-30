@@ -1,4 +1,4 @@
-#include "src/base/animatedwidget.h"
+#include "base/animatedwidget.h"
 
 AnimatedWidget::AnimatedWidget(QWidget* parent)
     : BaseWidget(parent)

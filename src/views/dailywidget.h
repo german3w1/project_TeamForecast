@@ -2,8 +2,8 @@
 #define DAILYWIDGET_H
 
 #include <QJsonObject>
-#include <src/models/dailymodel.h>
-#include <src/views/expandingweatherwidget.h>
+#include <models/dailymodel.h>
+#include <views/expandingweatherwidget.h>
 
 /**
 @brief Daily weather forecast widget

@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "src/views/locationforecast.h"
+#include "views/locationforecast.h"
 #include <QApplication>
 #include <QFile>
 #include <QJsonArray>
@@ -14,15 +14,15 @@
 #include <QTabWidget>
 #include <QVBoxLayout>
 #include <QWidget>
-#include <src/base/appstyle.h>
-#include <src/darkoverlayeffect.h>
-#include <src/dialogs/aboutdialog.h>
-#include <src/dialogs/locationsmanagerview.h>
-#include <src/dialogs/newlocationdialog.h>
-#include <src/dialogs/settingsdialog.h>
-#include <src/hintwidget.h>
-#include <src/models/locationmodel.h>
-#include <src/views/locationforecast.h>
+#include <base/appstyle.h>
+#include <darkoverlayeffect.h>
+#include <dialogs/aboutdialog.h>
+#include <dialogs/locationsmanagerview.h>
+#include <dialogs/newlocationdialog.h>
+#include <dialogs/settingsdialog.h>
+#include <hintwidget.h>
+#include <models/locationmodel.h>
+#include <views/locationforecast.h>
 
 /**
 @brief Main application window

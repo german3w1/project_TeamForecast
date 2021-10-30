@@ -1,4 +1,4 @@
-#include "src/dialogs/editlocationdialog.h"
+#include "dialogs/editlocationdialog.h"
 
 EditLocationDialog::EditLocationDialog(QWidget* parent, LocationModel& location_model, QWidget* dimmable_widget)
     : BasicLocationDialog(parent, dimmable_widget)

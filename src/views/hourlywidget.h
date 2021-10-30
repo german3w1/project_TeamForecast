@@ -2,8 +2,8 @@
 #define HOURLYWIDGET_H
 
 #include <QJsonObject>
-#include <src/models/hourlymodel.h>
-#include <src/views/expandingweatherwidget.h>
+#include <models/hourlymodel.h>
+#include <views/expandingweatherwidget.h>
 
 /**
 @brief Hourly weather forecast widget

@@ -1,4 +1,4 @@
-#include "src/base/scrollareawrapper.h"
+#include "base/scrollareawrapper.h"
 
 ScrollAreaWrapper::ScrollAreaWrapper(QWidget* parent)
     : QScrollArea(parent)

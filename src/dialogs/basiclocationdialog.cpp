@@ -1,4 +1,4 @@
-#include "src/dialogs/basiclocationdialog.h"
+#include "dialogs/basiclocationdialog.h"
 
 BasicLocationDialog::BasicLocationDialog(QWidget* parent, QWidget* dimmable_widget)
     : RoundedDialog(parent, dimmable_widget)

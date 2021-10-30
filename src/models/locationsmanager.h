@@ -1,7 +1,7 @@
 #ifndef LOCATIONSMANAGER_H
 #define LOCATIONSMANAGER_H
-#include <src/models/locationmodel.h>
-#include <src/views/locationforecast.h>
+#include <models/locationmodel.h>
+#include <views/locationforecast.h>
 #include <QObject>
 #include <QTimer>
 

@@ -1,4 +1,4 @@
-#include "src/models/dailymodel.h"
+#include "models/dailymodel.h"
 
 DailyModel::DailyModel()
     : AbstractWeatherModel()

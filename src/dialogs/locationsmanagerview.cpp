@@ -1,4 +1,4 @@
-#include "src/dialogs/locationsmanagerview.h"
+#include "dialogs/locationsmanagerview.h"
 #include <QLabel>
 
 LocationsManagerView* LocationsManagerView::instance_ = nullptr;

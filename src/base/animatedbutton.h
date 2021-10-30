@@ -1,7 +1,7 @@
 #ifndef ANIMATEDBUTTON_H
 #define ANIMATEDBUTTON_H
 
-#include "src/base/animatedwidget.h"
+#include "base/animatedwidget.h"
 
 class AnimatedButton : public AnimatedWidget {
 public:

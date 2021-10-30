@@ -1,7 +1,7 @@
 #ifndef DAILYMODEL_H
 #define DAILYMODEL_H
 
-#include "src/models/abstractweathermodel.h"
+#include "models/abstractweathermodel.h"
 
 class DailyModel : public AbstractWeatherModel {
 public:

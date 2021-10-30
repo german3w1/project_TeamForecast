@@ -1,8 +1,8 @@
 #ifndef LOCATIONMODEL_H
 #define LOCATIONMODEL_H
-#include <src/models/currentmodel.h>
-#include <src/models/hourlymodel.h>
-#include <src/models/dailymodel.h>
+#include <models/currentmodel.h>
+#include <models/hourlymodel.h>
+#include <models/dailymodel.h>
 #include <QList>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>

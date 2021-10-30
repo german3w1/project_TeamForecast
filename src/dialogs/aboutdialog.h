@@ -5,7 +5,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QVBoxLayout>
-#include <src/dialogs/roundeddialog.h>
+#include <dialogs/roundeddialog.h>
 
 /**
 @brief App about modal dialog

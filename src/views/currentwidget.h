@@ -2,8 +2,8 @@
 #define CURRENTWIDGET_H
 
 #include <QJsonObject>
-#include <src/models/currentmodel.h>
-#include <src/views/expandingweatherwidget.h>
+#include <models/currentmodel.h>
+#include <views/expandingweatherwidget.h>
 
 /**
 @brief Current weather forecast widget

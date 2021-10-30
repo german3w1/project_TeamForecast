@@ -1,4 +1,4 @@
-#include "src/views/dailywidget.h"
+#include "views/dailywidget.h"
 
 DailyWidget::DailyWidget(QWidget* parent)
     : ExpandingWeatherWidget(parent)

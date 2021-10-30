@@ -1,5 +1,5 @@
-#include "src/views/locationforecast.h"
-#include <src/dialogs/editlocationdialog.h>
+#include "views/locationforecast.h"
+#include <dialogs/editlocationdialog.h>
 
 LocationForecast::LocationForecast(QWidget* parent)
     : BaseWidget(parent)

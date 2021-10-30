@@ -9,8 +9,8 @@
 #include <QSettings>
 #include <QSlider>
 #include <QVBoxLayout>
-#include <src/dialogs/roundeddialog.h>
-#include <src/models/locationsmanager.h>
+#include <dialogs/roundeddialog.h>
+#include <models/locationsmanager.h>
 
 /**
 @brief App settings modal dialog

@@ -1,4 +1,4 @@
-#include "src/views/expandingweatherwidget.h"
+#include "views/expandingweatherwidget.h"
 
 ExpandingWeatherWidget::ExpandingWeatherWidget(QWidget* parent)
     : AnimatedWidget(parent)

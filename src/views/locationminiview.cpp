@@ -1,4 +1,4 @@
-#include "src/views/locationminiview.h"
+#include "views/locationminiview.h"
 
 LocationMiniView::LocationMiniView(QWidget* parent, LocationModel* model, LocationsManager* manager)
     : AnimatedWidget(parent)

@@ -4,8 +4,8 @@
 #include <QScrollArea>
 #include <QScrollBar>
 #include <QVBoxLayout>
-#include <src/base/appstyle.h>
-#include <src/base/basewidget.h>
+#include <base/appstyle.h>
+#include <base/basewidget.h>
 
 /**
 @brief Small wrapper over QScrollArea

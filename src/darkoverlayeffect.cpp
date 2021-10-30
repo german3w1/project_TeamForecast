@@ -1,4 +1,4 @@
-#include "src/darkoverlayeffect.h"
+#include "darkoverlayeffect.h"
 
 DarkOverlayEffect::DarkOverlayEffect(double opacity)
 {

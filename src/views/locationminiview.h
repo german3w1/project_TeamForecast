@@ -8,10 +8,10 @@
 #include <QPainter>
 #include <QStyleOption>
 #include <QWidget>
-#include <src/base/animatedwidget.h>
-#include <src/models/locationmodel.h>
-#include <src/models/locationsmanager.h>
-#include <src/roundedmenu.h>
+#include <base/animatedwidget.h>
+#include <models/locationmodel.h>
+#include <models/locationsmanager.h>
+#include <roundedmenu.h>
 
 class LocationMiniView : public AnimatedWidget {
     Q_OBJECT

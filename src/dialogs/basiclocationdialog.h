@@ -7,7 +7,7 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QVBoxLayout>
-#include <src/dialogs/roundeddialog.h>
+#include <dialogs/roundeddialog.h>
 
 /**
 @brief Basic modal dialog for add/edit location dialogs

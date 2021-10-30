@@ -1,9 +1,9 @@
 #ifndef NEWLOCATIONDIALOG_H
 #define NEWLOCATIONDIALOG_H
 
-#include <src/dialogs/basiclocationdialog.h>
-#include <src/models/locationsmanager.h>
-#include <src/views/locationforecast.h>
+#include <dialogs/basiclocationdialog.h>
+#include <models/locationsmanager.h>
+#include <views/locationforecast.h>
 
 /**
 @brief Modal dialog used for creating new user locations

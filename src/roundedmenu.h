@@ -6,11 +6,11 @@
 #include <QPainter>
 #include <QVBoxLayout>
 #include <QWidget>
-#include <src/base/animatedbutton.h>
-#include <src/darkoverlayeffect.h>
-#include <src/dialogs/editlocationdialog.h>
-#include <src/models/locationsmanager.h>
-#include <src/views/locationforecast.h>
+#include <base/animatedbutton.h>
+#include <darkoverlayeffect.h>
+#include <dialogs/editlocationdialog.h>
+#include <models/locationsmanager.h>
+#include <views/locationforecast.h>
 
 class RoundedMenu : public QWidget {
     Q_OBJECT

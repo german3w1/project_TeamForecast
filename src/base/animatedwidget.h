@@ -6,8 +6,8 @@
 #include <QParallelAnimationGroup>
 #include <QPropertyAnimation>
 #include <QWidget>
-#include <src/base/appstyle.h>
-#include <src/base/basewidget.h>
+#include <base/appstyle.h>
+#include <base/basewidget.h>
 
 class AnimatedWidget : public BaseWidget {
     Q_OBJECT

@@ -3,7 +3,7 @@
 
 #include <QPainter>
 #include <QWidget>
-#include <src/base/appstyle.h>
+#include <base/appstyle.h>
 
 class BaseWidget : public QWidget {
     Q_OBJECT

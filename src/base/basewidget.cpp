@@ -1,4 +1,4 @@
-#include "src/base/basewidget.h"
+#include "base/basewidget.h"
 
 BaseWidget::BaseWidget(QWidget* parent)
     : QWidget(parent)

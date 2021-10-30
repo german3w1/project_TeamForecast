@@ -1,4 +1,4 @@
-#include "src/models/locationsmanager.h"
+#include "models/locationsmanager.h"
 
 LocationsManager* LocationsManager::instance_ = nullptr;
 

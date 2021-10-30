@@ -1,4 +1,4 @@
-#include "src/base/appstyle.h"
+#include "base/appstyle.h"
 
 AppStyle::AppStyle()
 {

@@ -3,7 +3,7 @@
 #include <QList>
 #include <QPainter>
 #include <QWidget>
-#include <src/base/appstyle.h>
+#include <base/appstyle.h>
 
 using Hints = QList<std::tuple<QPoint, QPoint, QPoint, QString>>;
 class HintWidget : public QWidget {

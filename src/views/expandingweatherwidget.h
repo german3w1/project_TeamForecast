@@ -9,9 +9,9 @@
 #include <QStyleOption>
 #include <QVBoxLayout>
 #include <QWidget>
-#include <src/base/animatedwidget.h>
-#include <src/base/appstyle.h>
-#include <src/base/textwidget.h>
+#include <base/animatedwidget.h>
+#include <base/appstyle.h>
+#include <base/textwidget.h>
 
 /**
 @brief Base widget for Current-, Hourly- and Daily- weather forecast widgets.

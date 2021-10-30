@@ -1,7 +1,7 @@
 #ifndef HOURLYMODEL_H
 #define HOURLYMODEL_H
 
-#include "src/models/abstractweathermodel.h"
+#include "models/abstractweathermodel.h"
 
 class HourlyModel : public AbstractWeatherModel
 {

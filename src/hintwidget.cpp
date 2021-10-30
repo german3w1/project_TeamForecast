@@ -1,4 +1,4 @@
-#include "src/hintwidget.h"
+#include "hintwidget.h"
 
 HintWidget::HintWidget(QWidget* parent, const Hints& hints)
     : QWidget(parent)

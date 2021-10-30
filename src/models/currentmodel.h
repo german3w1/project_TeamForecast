@@ -1,7 +1,7 @@
 #ifndef CURRENTMODEL_H
 #define CURRENTMODEL_H
 
-#include "src/models/abstractweathermodel.h"
+#include "models/abstractweathermodel.h"
 
 class CurrentModel : public AbstractWeatherModel {
 public:

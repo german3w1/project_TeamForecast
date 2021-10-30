@@ -1,4 +1,4 @@
-#include "src/roundedmenu.h"
+#include "roundedmenu.h"
 #include <QDebug>
 #include <QFrame>
 RoundedMenu::RoundedMenu(LocationModel* model, LocationsManager* manager, QPoint pos, QWidget* parent)

@@ -1,4 +1,4 @@
-#include "src/dialogs/aboutdialog.h"
+#include "dialogs/aboutdialog.h"
 #include <QApplication>
 #include <QDebug>
 

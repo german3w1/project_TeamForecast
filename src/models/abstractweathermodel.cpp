@@ -1,4 +1,4 @@
-#include "src/models/abstractweathermodel.h"
+#include "models/abstractweathermodel.h"
 
 ushort AbstractWeatherModel::CONFIGURATION = 0x1121; ///< default configuration
 

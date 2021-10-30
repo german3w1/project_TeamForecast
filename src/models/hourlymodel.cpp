@@ -1,4 +1,4 @@
-#include "src/models/hourlymodel.h"
+#include "models/hourlymodel.h"
 
 HourlyModel::HourlyModel()
     : AbstractWeatherModel()

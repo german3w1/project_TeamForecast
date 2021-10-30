@@ -1,4 +1,4 @@
-#include "src/views/currentwidget.h"
+#include "views/currentwidget.h"
 
 CurrentWidget::CurrentWidget(QWidget* parent)
     : ExpandingWeatherWidget(parent)
